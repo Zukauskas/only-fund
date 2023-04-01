@@ -21,9 +21,9 @@ connection.connect((err) => {
 });
 
 export default function handler(req, res) {
-  const name = req.body.name;
-  const psw = md5(req.body.psw);
   if (req.method === 'POST') {
+    const name = req.body.name;
+    const psw = md5(req.body.psw);
     connection.query(`SELECT * FROM users WHERE username = '${name}' AND password = '${psw}'`, (err, rows) => {
       if (err) {
         res.json({ status: 'error', message: 'Error in query' });
@@ -50,7 +50,6 @@ export default function handler(req, res) {
         res.json({ status: 'error', message: 'Error in query' });
       }
       if (rows.length > 0) {
-        console.log(rows);
         res.json({
           status: 'ok',
           name: rows[0].username,

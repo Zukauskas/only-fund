@@ -25,9 +25,6 @@ export const GlobalProvider = ({ children }) => {
         credentials: 'include',
       });
       const data = await res.json();
-
-      console.log(data);
-
       if (data.status === 'ok') {
         setAuthRole(data.role);
         setLogged(true);
@@ -39,22 +36,6 @@ export const GlobalProvider = ({ children }) => {
       }
     };
     fetchAuth();
-    /* fetch('http://localhost:3000/api/login', {
-      method: 'GET',
-      credentials: 'include',
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.status === 'ok') {
-          setAuthRole(data.role);
-          setLogged(true);
-          setAuthName(data.name);
-        } else {
-          setLogged(false);
-          setAuthName(null);
-          setRoute('login');
-        }
-      }); */
   }, []);
 
   // -------------GET Stories (Home.jsx)----------
@@ -143,22 +124,11 @@ export const GlobalProvider = ({ children }) => {
     })
       .then(res => res.json())
       .then(data => {
-        setRoute('login');
         setLogged(false);
         setAuthName(false);
         setRoute('home');
         setAuthRole(null);
       });
-
-    /*  axios
-      .post('http://localhost:3000/api/logout', {}, { withCredentials: true })
-      .then(res => {
-        setRoute('login');
-        setLogged(false);
-        setAuthName(false);
-        setRoute('home');
-        setAuthRole(null);
-      }); */
   };
 
   return (

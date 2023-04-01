@@ -1,6 +1,6 @@
-import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { Global } from './Global';
+import Image from 'next/image';
 
 const Home = () => {
   const URL = 'http://localhost:3000/stories';
@@ -46,11 +46,18 @@ const Home = () => {
     if (null === transfers) {
       return;
     }
-    axios.put(URL + '/' + transfers.id, transfers).then(res => {
-      console.log(res.data);
-      setLastUpdate(Date.now());
-    });
-  }, [transfers]);
+    fetch(URL + '/' + transfers.id, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(transfers),
+    })
+      .then(res => res.json())
+      .then(data => {
+        setLastUpdate(Date.now());
+      });
+  }, [transfers, setLastUpdate]);
 
   const imgURL = 'http://localhost:3000/img/';
   return (
@@ -66,9 +73,11 @@ const Home = () => {
             <div
               key={s.id}
               className='bg-white shadow overflow-hidden sm:rounded-lg'>
-              <img
+              <Image
                 src={`${s.image ? imgURL + s.image : imgURL + 'unknown.png'}`}
                 alt=''
+                height={300}
+                width={300}
                 className='w-full h-64 object-cover'
               />
 

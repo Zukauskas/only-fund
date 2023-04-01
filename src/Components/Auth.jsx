@@ -19,17 +19,21 @@ function Auth({ children }) {
         method: 'GET',
         credentials: 'include',
       });
-      console.log(res);
-      const data = await res.json();
-      console.log(data);
-      if (data.status === 'ok') {
-        setAuthRole(data.role);
-        setLogged(true);
-        setAuthName(data.name);
-      } else {
-        setLogged(false);
-        setAuthName(null);
-        setRoute('login');
+      const responseText = await res.text();
+
+      try {
+        const data = JSON.parse(responseText);
+        if (data.status === 'ok') {
+          setAuthRole(data.role);
+          setLogged(true);
+          setAuthName(data.name);
+        } else {
+          setLogged(false);
+          setAuthName(null);
+          setRoute('login');
+        }
+      } catch (error) {
+        console.error('Error parsing JSON:', error);
       }
     };
     fetchAuth();
