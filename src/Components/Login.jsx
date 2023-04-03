@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { Global } from './Global';
+import { Global } from '../contexts/Global';
 
 function Login() {
   const [error, setError] = useState(null);

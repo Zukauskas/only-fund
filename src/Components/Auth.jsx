@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { Global } from './Global';
+import { Global } from '../contexts/Global';
 import Login from './Login';
 
 function Auth({ children }) {

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import Home from './Home';
-import { Global } from './Global';
+import Home from './Homepage';
+import { Global } from '../contexts/Global';
 import Login from './Login';
 import Register from './Register';
 import NewProjects from './NewProjects';

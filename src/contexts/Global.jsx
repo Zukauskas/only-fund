@@ -17,27 +17,6 @@ export const GlobalProvider = ({ children }) => {
   // server
   const URL = 'http://localhost:3001/api/stories';
 
-  // Check if logged on page load in next.js
-  useEffect(() => {
-    const fetchAuth = async () => {
-      const res = await fetch('http://localhost:3001/api/login', {
-        method: 'GET',
-        credentials: 'include',
-      });
-      const data = await res.json();
-      if (data.status === 'ok') {
-        setAuthRole(data.role);
-        setLogged(true);
-        setAuthName(data.name);
-      } else {
-        setLogged(false);
-        setAuthName(null);
-        setRoute('login');
-      }
-    };
-    fetchAuth();
-  }, []);
-
   // -------------GET Stories (Home.jsx)----------
   useEffect(() => {
     fetch(URL)

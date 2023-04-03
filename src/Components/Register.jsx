@@ -1,6 +1,5 @@
-import axios from 'axios';
 import { useContext, useState } from 'react';
-import { Global } from './Global';
+import { Global } from '../contexts/Global';
 
 function Register() {
   const [error, setError] = useState(null);
@@ -24,7 +23,31 @@ function Register() {
       return;
     }
 
-    axios
+    fetch('http://localhost:3001/api/register', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, psw }),
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'ok') {
+          setName('');
+          setPsw('');
+          setPsw2('');
+          setError(null);
+          setRoute('login');
+        } else {
+          setError('Server error');
+        }
+      })
+      .catch(error => {
+        setError(error.response ? error.response.statusText : error.code);
+      });
+
+    /* axios
       .post(
         'http://localhost:3001/register',
         { name, psw },
@@ -44,7 +67,7 @@ function Register() {
       })
       .catch(error => {
         setError(error.response ? error.response.statusText : error.code);
-      });
+      }); */
   };
 
   return (

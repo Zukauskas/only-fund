@@ -1,5 +1,6 @@
 import { useContext } from 'react';
-import { Global } from './Global';
+import { Global } from '../contexts/Global';
+import Link from 'next/link';
 
 function Nav() {
   const { route, setRoute, authName, logOut, authRole } = useContext(Global);
@@ -11,21 +12,17 @@ function Nav() {
       </div>
       <div className='w-full block flex-grow lg:flex lg:items-center lg:w-auto'>
         <div className='text-sm lg:flex-grow'>
-          <span
-            onClick={() => setRoute('home')}
-            className={`block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-300 mr-4 ${
-              route === 'home' ? 'underline' : ''
-            }`}>
+          <Link
+            href='/'
+            className='block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-300 mr-4'>
             Home
-          </span>
+          </Link>
           {authRole && (
-            <span
-              onClick={() => setRoute('projects')}
-              className={`block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-300 mr-4 ${
-                route === 'projects' ? 'underline' : ''
-              }`}>
+            <Link
+              href='/newProject'
+              className='block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-300 mr-4'>
               New Project
-            </span>
+            </Link>
           )}
           {authRole === 2 ? (
             <span

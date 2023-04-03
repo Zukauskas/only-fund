@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { Global } from './Global';
+import { Global } from '../contexts/Global';
 import Image from 'next/image';
 
 const Home = () => {
