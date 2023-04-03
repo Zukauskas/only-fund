@@ -107,7 +107,7 @@ export const GlobalProvider = ({ children }) => {
     if (null === deleteStory) {
       return;
     }
-    fetch(URL + '/' + deleteStory.id, {
+    fetch(URL + '?id=' + deleteStory.id, {
       method: 'DELETE',
     })
       .then(res => res.json())

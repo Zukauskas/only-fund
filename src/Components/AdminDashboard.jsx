@@ -3,7 +3,7 @@ import { Global } from './Global';
 
 const AdminDashboard = () => {
   // const { accounts } = useContext(Global);
-  const imgURL = 'http://localhost:3123/img/';
+  const imgURL = 'http://localhost:3000/img/';
 
   const { stories, setDeleteStory, setConfirm } = useContext(Global);
 
@@ -27,7 +27,7 @@ const AdminDashboard = () => {
               <div key={s.id} className='p-4 border-2 border-black rounded-lg'>
                 <img
                   className='w-24 h-24 mx-auto mb-4 object-cover'
-                  src={`${s.image ? imgURL + s.image : './unknown.png'}`}
+                  src={`${s.image ? imgURL + s.image : 'unknown.png'}`}
                   alt=''
                 />
                 <p className='mb-2'>{s.text}</p>
