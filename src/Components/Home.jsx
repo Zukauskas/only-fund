@@ -3,7 +3,6 @@ import { Global } from './Global';
 import Image from 'next/image';
 
 const Home = () => {
-  const URL = 'http://localhost:3000/stories';
   const [enteredData, setEnteredData] = useState({
     id: null,
     amount: '',
@@ -12,9 +11,8 @@ const Home = () => {
 
   const [donorName, setDonorName] = useState('');
   const [donation, setDonation] = useState('');
-  const [transfers, setTransfers] = useState(null);
 
-  const { stories, setLastUpdate } = useContext(Global);
+  const { stories, setTransfers } = useContext(Global);
 
   const submitHandler = e => {
     e.preventDefault();
@@ -42,24 +40,7 @@ const Home = () => {
     setEnteredData(p => ({ ...p, id: e.target.id, name: e.target.value }));
   };
 
-  useEffect(() => {
-    if (null === transfers) {
-      return;
-    }
-    fetch(URL + '/' + transfers.id, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(transfers),
-    })
-      .then(res => res.json())
-      .then(data => {
-        setLastUpdate(Date.now());
-      });
-  }, [transfers, setLastUpdate]);
-
-  const imgURL = 'http://localhost:3000/img/';
+  const imgURL = 'http://localhost:3001/img/';
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
       {stories &&

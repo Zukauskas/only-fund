@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import { Global } from './Global';
+import Image from 'next/image';
 
 const AdminDashboard = () => {
-  // const { accounts } = useContext(Global);
-  const imgURL = 'http://localhost:3000/img/';
+  const imgURL = 'http://localhost:3001/img/';
 
   const { stories, setDeleteStory, setConfirm } = useContext(Global);
 
@@ -25,8 +25,10 @@ const AdminDashboard = () => {
             )
             .map(s => (
               <div key={s.id} className='p-4 border-2 border-black rounded-lg'>
-                <img
-                  className='w-24 h-24 mx-auto mb-4 object-cover'
+                <Image
+                  className='w-48 h-48 mx-auto mb-4 object-cover'
+                  width={200}
+                  height={200}
                   src={`${s.image ? imgURL + s.image : 'unknown.png'}`}
                   alt=''
                 />

@@ -15,7 +15,7 @@ function Auth({ children }) {
 
   useEffect(() => {
     const fetchAuth = async () => {
-      const res = await fetch('http://localhost:3000/api/login', {
+      const res = await fetch('http://localhost:3001/api/login', {
         method: 'GET',
         credentials: 'include',
       });

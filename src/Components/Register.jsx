@@ -26,7 +26,7 @@ function Register() {
 
     axios
       .post(
-        'http://localhost:3123/register',
+        'http://localhost:3001/register',
         { name, psw },
         { withCredentials: true },
       )

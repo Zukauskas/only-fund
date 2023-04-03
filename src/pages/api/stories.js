@@ -22,6 +22,8 @@ connection.connect((err) => {
 export default function handler(req, res) {
   const { method } = req;
   const { id } = req.query;
+  const { confirm } = req.query;
+  const { isTransfer } = req.query;
 
   switch (method) {
     case 'GET':
@@ -82,23 +84,39 @@ export default function handler(req, res) {
 
     case 'PUT':
       const { name, sum } = req.body;
-      connection.query(`UPDATE stories SET donorList = JSON_ARRAY_APPEND(donorList, \'$\', JSON_OBJECT(\'name\', ?, \'sum\', ?)) WHERE id = ?`, [name, sum, id], (error, results) => {
-        if (error) {
-          console.error(error);
-          res.status(500).json({ message: 'An error occurred while updating the balance' });
-          return;
-        }
 
-      });
-      connection.query(`UPDATE stories SET sumDonated = sumDonated + ? WHERE id = ?`, [+sum, id], (error, results) => {
-        if (error) {
+      if (confirm === 'true') {
+        connection.query(`UPDATE stories SET isConfirmed = 1 WHERE id = ?`, [id], (error, results) => {
+          if (error) {
 
-          res.status(500).json({ message: 'An error occurred while updating the balance' });
-          return;
-        }
+            res.status(500).json({ message: 'An error occurred while updating the balance' });
+            return;
+          }
 
-        res.json({ message: 'Balance needed updated' });
-      });04F2 - B2D6
+          res.json({ message: 'Project confirmed' });
+        });
+      } else if (isTransfer === 'true') {
+        connection.query(`UPDATE stories SET donorList = JSON_ARRAY_APPEND(donorList, \'$\', JSON_OBJECT(\'name\', ?, \'sum\', ?)) WHERE id = ?`, [name, sum, id], (error, results) => {
+          if (error) {
+            console.error(error);
+            res.status(500).json({ message: 'An error occurred while updating the balance' });
+            return;
+          }
+
+        });
+        connection.query(`UPDATE stories SET sumDonated = sumDonated + ? WHERE id = ?`, [+sum, id], (error, results) => {
+          if (error) {
+
+            res.status(500).json({ message: 'An error occurred while updating the balance' });
+            return;
+          }
+
+          res.json({ message: 'Balance needed updated' });
+        });
+      } else {
+        res.status(400).json({ message: 'Bad request' });
+      }
+      break;
 
     default:
       res.status(400).json({ success: false });

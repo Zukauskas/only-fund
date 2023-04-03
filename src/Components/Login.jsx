@@ -11,7 +11,7 @@ function Login() {
   // Login function for nextjs server
 
   const login = () => {
-    fetch('http://localhost:3000/api/login', {
+    fetch('http://localhost:3001/api/login', {
       method: 'POST',
       credentials: 'include',
       headers: {

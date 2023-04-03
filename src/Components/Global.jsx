@@ -15,12 +15,12 @@ export const GlobalProvider = ({ children }) => {
   const [transfers, setTransfers] = useState(null);
 
   // server
-  const URL = 'http://localhost:3000/api/stories';
+  const URL = 'http://localhost:3001/api/stories';
 
   // Check if logged on page load in next.js
   useEffect(() => {
     const fetchAuth = async () => {
-      const res = await fetch('http://localhost:3000/api/login', {
+      const res = await fetch('http://localhost:3001/api/login', {
         method: 'GET',
         credentials: 'include',
       });
@@ -71,7 +71,7 @@ export const GlobalProvider = ({ children }) => {
     if (null === transfers) {
       return;
     }
-    fetch(URL + '/transfer/' + transfers.id, {
+    fetch(URL + '?isTransfer=true&id=' + transfers.id, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -89,7 +89,7 @@ export const GlobalProvider = ({ children }) => {
     if (null === confirm) {
       return;
     }
-    fetch(URL + '/confirm/' + confirm.id, {
+    fetch(URL + '?confirm=true&id=' + confirm.id, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -118,7 +118,7 @@ export const GlobalProvider = ({ children }) => {
 
   //LOGOUT
   const logOut = () => {
-    fetch('http://localhost:3000/api/logout', {
+    fetch('http://localhost:3001/api/logout', {
       method: 'POST',
       credentials: 'include',
     })
