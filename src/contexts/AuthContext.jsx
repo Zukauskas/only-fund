@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
         setLogged(false);
         setAuthName(false);
         setAuthRole(null);
-        router.push('/login');
+        router.push('/');
       });
   };
 
