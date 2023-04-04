@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { Global } from '../contexts/Global';
+import { AuthContext } from '../contexts/AuthContext';
 import { useRouter } from 'next/router';
 
 function Login() {
@@ -8,7 +8,7 @@ function Login() {
     const [psw, setPsw] = useState('');
     const router = useRouter();
 
-    const { setLogged, setAuthName, setAuthRole } = useContext(Global);
+    const { setLogged, setAuthName, setAuthRole } = useContext(AuthContext);
 
     // Login function for nextjs server
 
