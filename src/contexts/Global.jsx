@@ -3,10 +3,6 @@ import { createContext, useEffect, useState } from 'react';
 export const Global = createContext();
 
 export const GlobalProvider = ({ children }) => {
-  const [route, setRoute] = useState('home');
-  const [logged, setLogged] = useState(null);
-  const [authName, setAuthName] = useState(null);
-  const [authRole, setAuthRole] = useState(null);
   const [stories, setStories] = useState(null);
   const [lastUpdate, setLastUpdate] = useState(Date.now());
   const [project, setProject] = useState(null);
@@ -115,8 +111,6 @@ export const GlobalProvider = ({ children }) => {
       value={{
         confirm,
         setConfirm,
-        authRole,
-        setAuthRole,
         project,
         setProject,
         stories,
@@ -127,15 +121,7 @@ export const GlobalProvider = ({ children }) => {
         setDeleteStory,
         transfers,
         setTransfers,
-        //route
-        route,
-        setRoute,
-        // auth
-        authName,
-        setAuthName,
         logOut,
-        logged,
-        setLogged,
       }}>
       {children}
     </Global.Provider>

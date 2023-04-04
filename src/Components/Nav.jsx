@@ -1,9 +1,9 @@
 import { useContext } from 'react';
-import { Global } from '../contexts/Global';
 import Link from 'next/link';
+import { AuthContext } from '@/contexts/AuthContext';
 
 function Nav() {
-  const { authName, logOut, authRole } = useContext(Global);
+  const { authName, logOut, authRole } = useContext(AuthContext);
 
   return (
     <nav className='flex items-center justify-between flex-wrap bg-blue-500 p-6'>

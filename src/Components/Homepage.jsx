@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Global } from '../contexts/Global';
 import Image from 'next/image';
 
-const Home = () => {
+const Homepage = () => {
   const [enteredData, setEnteredData] = useState({
     id: null,
     amount: '',
@@ -144,4 +144,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Homepage;

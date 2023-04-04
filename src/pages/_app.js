@@ -4,10 +4,10 @@ import { GlobalProvider } from '@/contexts/Global'
 
 export default function App({ Component, pageProps }) {
   return (
-    <AuthProvider>
-      <GlobalProvider>
+    <GlobalProvider>
+      <AuthProvider>
         <Component { ...pageProps } />
-      </GlobalProvider>
-    </AuthProvider>
+      </AuthProvider>
+    </GlobalProvider>
   )
 }

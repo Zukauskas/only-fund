@@ -15,6 +15,7 @@
     "cookies-next": "^2.1.1",
     "eslint": "8.37.0",
     "eslint-config-next": "13.2.4",
+    "js-cookie": "^3.0.1",
     "md5": "^2.3.0",
     "mysql": "^2.18.1",
     "next": "^13.2.4",
