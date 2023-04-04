@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 export const AuthContext = createContext();
 
@@ -6,7 +7,7 @@ export const AuthProvider = ({ children }) => {
   const [logged, setLogged] = useState(null);
   const [authName, setAuthName] = useState(null);
   const [authRole, setAuthRole] = useState(null);
-  const [route, setRoute] = useState('home');
+  const router = useRouter();
 
   // Check if logged on page load in next.js
   useEffect(() => {
@@ -20,10 +21,11 @@ export const AuthProvider = ({ children }) => {
         setAuthRole(data.role);
         setLogged(true);
         setAuthName(data.name);
+        router.push('/');
       } else {
         setLogged(false);
         setAuthName(null);
-        setRoute('login');
+        router.push('/login');
       }
     };
     fetchAuth();
@@ -38,8 +40,6 @@ export const AuthProvider = ({ children }) => {
         setAuthName,
         authRole,
         setAuthRole,
-        route,
-        setRoute,
       }}>
       {children}
     </AuthContext.Provider>
