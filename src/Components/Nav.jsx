@@ -3,7 +3,7 @@ import { Global } from '../contexts/Global';
 import Link from 'next/link';
 
 function Nav() {
-  const { route, setRoute, authName, logOut, authRole } = useContext(Global);
+  const { authName, logOut, authRole } = useContext(Global);
 
   return (
     <nav className='flex items-center justify-between flex-wrap bg-blue-500 p-6'>
@@ -25,13 +25,11 @@ function Nav() {
             </Link>
           )}
           {authRole === 2 ? (
-            <span
-              onClick={() => setRoute('dashboard')}
-              className={`block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-300 mr-4 ${
-                route === 'dashboard' ? 'underline' : ''
-              }`}>
+            <Link
+              href='/dashboard'
+              className='block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-300 mr-4'>
               Admin Dashboard
-            </span>
+            </Link>
           ) : null}
         </div>
         <div>
@@ -48,20 +46,16 @@ function Nav() {
             </>
           ) : (
             <>
-              <span
-                onClick={() => setRoute('login')}
-                className={`inline-block py-2 px-4 text-white font-semibold hover:text-gray-300 mr-2 ${
-                  route === 'login' ? 'underline' : ''
-                }`}>
+              <Link
+                href='/login'
+                className='inline-block py-2 px-4 text-white font-semibold hover:text-gray-300 mr-2'>
                 Login
-              </span>
-              <span
-                onClick={() => setRoute('register')}
-                className={`inline-block py-2 px-4 text-white font-semibold hover:text-gray-300 ${
-                  route === 'register' ? 'underline' : ''
-                }`}>
+              </Link>
+              <Link
+                href='/register'
+                className='inline-block py-2 px-4 text-white font-semibold hover:text-gray-300'>
                 Register
-              </span>
+              </Link>
             </>
           )}
         </div>

@@ -6,7 +6,7 @@ import Head from 'next/head'
 
 export default function Home() {
   return (
-    <GlobalProvider>
+    <>
       <Head>
         <title>Only Fund | Get Money From People</title>
         <meta name="description" content="Project for educational purposes only" />
@@ -15,6 +15,6 @@ export default function Home() {
       </Head>
       <Nav />
       <Homepage />
-    </GlobalProvider>
+    </>
   )
 }
