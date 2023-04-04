@@ -91,21 +91,6 @@ export const GlobalProvider = ({ children }) => {
       });
   }, [deleteStory]);
 
-  //LOGOUT
-  const logOut = () => {
-    fetch('http://localhost:3001/api/logout', {
-      method: 'POST',
-      credentials: 'include',
-    })
-      .then(res => res.json())
-      .then(data => {
-        setLogged(false);
-        setAuthName(false);
-        setRoute('home');
-        setAuthRole(null);
-      });
-  };
-
   return (
     <Global.Provider
       value={{
@@ -121,7 +106,6 @@ export const GlobalProvider = ({ children }) => {
         setDeleteStory,
         transfers,
         setTransfers,
-        logOut,
       }}>
       {children}
     </Global.Provider>

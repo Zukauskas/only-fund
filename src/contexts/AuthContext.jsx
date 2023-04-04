@@ -31,11 +31,27 @@ export const AuthProvider = ({ children }) => {
     fetchAuth();
   }, []);
 
+  //LOGOUT
+  const logOut = () => {
+    fetch('http://localhost:3001/api/logout', {
+      method: 'POST',
+      credentials: 'include',
+    })
+      .then(res => res.json())
+      .then(data => {
+        setLogged(false);
+        setAuthName(false);
+        setAuthRole(null);
+        router.push('/login');
+      });
+  };
+
   return (
     <AuthContext.Provider
       value={{
         logged,
         setLogged,
+        logOut,
         authName,
         setAuthName,
         authRole,
