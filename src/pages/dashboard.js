@@ -6,7 +6,7 @@ import withAuth from '@/Components/withAuth';
 
 
 const Dashboard = () => {
-    const imgURL = 'http://localhost:3001/img/';
+    const imgURL = 'http://localhost:3000/img/';
 
     const { stories, setDeleteStory, setConfirm } = useContext(Global);
 

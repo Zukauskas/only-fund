@@ -22,7 +22,7 @@ function Register() {
             return;
         }
 
-        fetch('http://localhost:3001/api/register', {
+        fetch('http://localhost:3000/api/register', {
             method: 'POST',
             credentials: 'include',
             headers: {

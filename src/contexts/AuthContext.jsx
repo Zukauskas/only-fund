@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   // Check if logged on page load in next.js
   useEffect(() => {
     const fetchAuth = async () => {
-      const res = await fetch('http://localhost:3001/api/login', {
+      const res = await fetch('http://localhost:3000/api/login', {
         method: 'GET',
         credentials: 'include',
       });
@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
 
   //LOGOUT
   const logOut = () => {
-    fetch('http://localhost:3001/api/logout', {
+    fetch('http://localhost:3000/api/logout', {
       method: 'POST',
       credentials: 'include',
     })

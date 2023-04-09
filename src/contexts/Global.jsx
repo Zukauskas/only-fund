@@ -11,7 +11,7 @@ export const GlobalProvider = ({ children }) => {
   const [transfers, setTransfers] = useState(null);
 
   // server
-  const URL = 'http://localhost:3001/api/stories';
+  const URL = 'http://localhost:3000/api/stories';
 
   // -------------GET Stories (Home.jsx)----------
   useEffect(() => {

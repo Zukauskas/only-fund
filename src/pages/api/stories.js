@@ -3,11 +3,12 @@ const { v4: uuidv4 } = require('uuid');
 const fs = require('fs');
 
 const connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  host: 'localhost',
+  user: 'pmaUser',
+  password: 'pma',
+  database: 'final',
 });
+
 
 connection.connect((err) => {
 

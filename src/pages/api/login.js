@@ -3,10 +3,10 @@ import md5 from 'md5';
 import cookie from 'cookie';
 
 const connection = mysql.createConnection({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  host: 'localhost',
+  user: 'pmaUser',
+  password: 'pma',
+  database: 'final',
 });
 
 connection.connect((err) => {
@@ -27,14 +27,14 @@ export default async function handler(req, res) {
         const psw = md5(req.body.psw);
         connection.query(`SELECT * FROM users WHERE username = '${name}' AND password = '${psw}'`, (err, rows) => {
           if (err) {
-            res.json({ status: 'error', message: 'Error in query' });
+            res.json({ status: 'error', message: 'Error in query 1' });
             resolve();
           }
           if (rows.length > 0) {
             const session = md5(Math.random());
             connection.query(`UPDATE users SET session = '${session}' WHERE username = '${name}' AND password = '${psw}'`, (err, rows) => {
               if (err) {
-                res.json({ status: 'error', message: 'Error in query' });
+                res.json({ status: 'error', message: 'Error in query 2' });
               }
             });
             res.setHeader('Set-Cookie', cookie.serialize('session', session, { httpOnly: true, path: '/' }));
