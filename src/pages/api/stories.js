@@ -3,12 +3,11 @@ const { v4: uuidv4 } = require('uuid');
 const fs = require('fs');
 
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'pmaUser',
-  password: 'pma',
-  database: 'final',
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 });
-
 
 connection.connect((err) => {
 
@@ -66,11 +65,12 @@ export default async function handler(req, res) {
 
         connection.query('INSERT INTO stories (text, sumNeeded, image, sumDonated) VALUES (?, ?, ?, ?)', [text, sumNeeded, fileName, 0], (err, rows) => {
           if (err) {
-            console.log(err);
+            res.status(500).json({ message: 'An error occurred while adding the story' });
+            resolve();
           } else {
             res.status(200).json({ message: 'Story added' });
+            resolve();
           }
-          resolve();
         });
         break;
 
@@ -91,8 +91,7 @@ export default async function handler(req, res) {
         if (confirm === 'true') {
           connection.query(`UPDATE stories SET isConfirmed = 1 WHERE id = ?`, [id], (error, results) => {
             if (error) {
-
-              res.status(500).json({ message: 'An error occurred while updating the balance' });
+              res.status(500).json({ message: 'An error occurred while confirming the project' });
               return;
             }
 
@@ -102,7 +101,7 @@ export default async function handler(req, res) {
           connection.query(`UPDATE stories SET donorList = JSON_ARRAY_APPEND(donorList, \'$\', JSON_OBJECT(\'name\', ?, \'sum\', ?)) WHERE id = ?`, [name, sum, id], (error, results) => {
             if (error) {
               console.error(error);
-              res.status(500).json({ message: 'An error occurred while updating the balance' });
+              res.status(500).json({ message: 'An error occurred while updating the donor list' });
               return;
             }
 
@@ -114,7 +113,7 @@ export default async function handler(req, res) {
               return;
             }
 
-            res.json({ message: 'Balance needed updated' });
+            res.json({ message: 'Money have been donated' });
           });
         } else {
           res.status(400).json({ message: 'Bad request' });

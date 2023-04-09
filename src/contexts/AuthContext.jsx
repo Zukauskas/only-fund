@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
       } else {
         setLogged(false);
         setAuthName(null);
-        router.push('/login');
+        router.push('/');
       }
     };
     fetchAuth();
