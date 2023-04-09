@@ -38,7 +38,7 @@ export default async function handler(req, res) {
         });
         break;
       case 'POST':
-        const { text, sumNeeded } = req.body;
+        const { title, text, sumNeeded } = req.body;
         let fileName = null;
         if (req.body.file !== null) {
           let type = 'unknown';
@@ -63,7 +63,7 @@ export default async function handler(req, res) {
           });
         }
 
-        connection.query('INSERT INTO stories (text, sumNeeded, image, sumDonated) VALUES (?, ?, ?, ?)', [text, sumNeeded, fileName, 0], (err, rows) => {
+        connection.query('INSERT INTO stories (title, text, sumNeeded, image, sumDonated) VALUES (?, ?, ?, ?, ?)', [title, text, sumNeeded, fileName, 0], (err, rows) => {
           if (err) {
             res.status(500).json({ message: 'An error occurred while adding the story' });
             resolve();

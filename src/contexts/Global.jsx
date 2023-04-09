@@ -36,7 +36,6 @@ export const GlobalProvider = ({ children }) => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         setLastUpdate(Date.now());
       });
   }, [project]);
@@ -55,7 +54,6 @@ export const GlobalProvider = ({ children }) => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         setLastUpdate(Date.now());
       });
   }, [transfers]);

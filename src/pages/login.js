@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import { AuthContext } from '../contexts/AuthContext';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 function Login() {
     const [error, setError] = useState(null);
@@ -40,48 +41,58 @@ function Login() {
 
     return (
         <div className='login bg-gray-100 flex justify-center items-center h-screen'>
-            <div className='bg-white rounded-lg shadow-lg p-8'>
-                <div className='card-header'>
+            <div className='bg-white rounded-lg shadow-lg p-8 w-full max-w-md'>
+                <div className='text-center'>
                     { error ? (
-                        <span className='text-red-600'>Login error</span>
+                        <span className='text-red-600 font-semibold text-lg'>Login error</span>
                     ) : (
-                        <span>Login</span>
+                        <span className='text-gray-900 font-semibold text-lg'>Login</span>
                     ) }
                 </div>
                 <div className='login-container mt-4'>
-                    <h5 className='card-title mb-4'>
+                    <h5 className='text-center text-gray-700 font-medium'>
                         <span>Hello, guest!</span>
                     </h5>
                     <div className='mb-4'>
-                        <label htmlFor='name' className='block mb-2 font-bold'>
+                        <label htmlFor='name' className='block mb-2 font-medium text-gray-700'>
                             Name
                         </label>
                         <input
                             id='name'
                             type='text'
                             value={ name }
-                            onChange={ e => setName(e.target.value) }
-                            className='w-full border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline'
+                            onChange={ (e) => setName(e.target.value) }
+                            className='w-full border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
                         />
                     </div>
                     <div className='mb-4'>
-                        <label htmlFor='password' className='block mb-2 font-bold'>
+                        <label
+                            htmlFor='password'
+                            className='block mb-2 font-medium text-gray-700'>
                             Password
                         </label>
                         <input
                             id='password'
                             type='password'
                             value={ psw }
-                            onChange={ e => setPsw(e.target.value) }
-                            className='w-full border rounded py-2 px-3 leading-tight focus:outline-none focus:shadow-outline'
+                            onChange={ (e) => setPsw(e.target.value) }
+                            className='w-full border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
                         />
                     </div>
-                    <div className='flex justify-end'>
+                    <div className='flex justify-center'>
                         <button
-                            className='add bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+                            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
                             onClick={ login }>
                             Login
                         </button>
+                    </div>
+                    <div className='mt-4 text-center'>
+                        <span className='text-gray-600'>Don&apos;t have an account? </span>
+                        <Link
+                            href='/register'
+                            className='text-blue-500 hover:text-blue-700 font-medium'>
+                            Register!
+                        </Link>
                     </div>
                 </div>
             </div>

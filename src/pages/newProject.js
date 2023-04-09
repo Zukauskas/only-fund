@@ -5,9 +5,14 @@ import Nav from '@/Components/Nav';
 
 const NewProject = () => {
     const { setProject } = useContext(Global);
+    const [title, setTitle] = useState('');
     const [text, setText] = useState('');
     const [sumNeeded, setSumNeeded] = useState('');
     const [file, readFile, remImage] = useFile();
+
+    const addTitleHandler = e => {
+        setTitle(e.target.value);
+    };
 
     const addTextHandler = e => {
         setText(e.target.value);
@@ -18,7 +23,8 @@ const NewProject = () => {
 
     const submitHandler = e => {
         e.preventDefault();
-        setProject({ text, sumNeeded, file });
+        setProject({ title, text, sumNeeded, file });
+        setTitle('');
         setText('');
         setSumNeeded('');
         remImage();
@@ -31,6 +37,21 @@ const NewProject = () => {
             <div className='bg-gray-100 p-8 rounded-lg'>
                 <h2 className='text-2xl font-bold mb-6'>Add New Projects</h2>
                 <form onSubmit={ submitHandler } className='space-y-4'>
+                    <div>
+                        <label htmlFor='title' className='block text-sm font-medium'>
+                            Enter project title:
+                        </label>
+                        <input
+                            type='text'
+                            id='title'
+                            value={ title }
+                            onChange={ addTitleHandler }
+                            placeholder='Project title'
+                            title='Must contain at least 5 symbols'
+                            required
+                            className='w-full p-2 mt-1 border border-gray-300 rounded-lg'
+                        />
+                    </div>
                     <div>
                         <label htmlFor='name' className='block text-sm font-medium'>
                             Enter project description:
@@ -48,7 +69,7 @@ const NewProject = () => {
                     </div>
                     <div>
                         <label htmlFor='donate-sum' className='block text-sm font-medium'>
-                            Amount to donate:
+                            Amount needed:
                         </label>
                         <input
                             type='number'

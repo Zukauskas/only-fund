@@ -6,58 +6,56 @@ function Nav() {
   const { authName, logOut, authRole } = useContext(AuthContext);
 
   return (
-    <nav className='flex items-center justify-between flex-wrap bg-blue-500 p-6'>
-      <div className='flex items-center flex-shrink-0 text-white mr-6'>
-        <h1 className='font-semibold text-xl tracking-tight'>Only Fund</h1>
-      </div>
-      <div className='w-full block flex-grow lg:flex lg:items-center lg:w-auto'>
-        <div className='text-sm lg:flex-grow'>
-          <Link
-            href='/'
-            className='block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-300 mr-4'>
-            Home
-          </Link>
-          {authRole && (
+    <nav className='bg-white shadow'>
+      <div className='container mx-auto px-4'>
+        <div className='flex items-center justify-between py-4'>
+          <div className='text-green-600 font-semibold text-xl tracking-tight'>
+            <h1>Only Fund</h1>
+          </div>
+          <div className='hidden md:flex items-center space-x-4'>
             <Link
-              href='/newProject'
-              className='block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-300 mr-4'>
-              New Project
+              href='/'
+              className='text-gray-700 hover:text-green-600 transition-colors'>
+              Home
             </Link>
-          )}
-          {authRole === 2 ? (
-            <Link
-              href='/dashboard'
-              className='block mt-4 lg:inline-block lg:mt-0 text-white hover:text-gray-300 mr-4'>
-              Admin Dashboard
-            </Link>
-          ) : null}
-        </div>
-        <div>
-          {authName ? (
-            <>
-              <span className='inline-block py-2 px-4 text-white font-semibold mr-2'>
-                {authName}
-              </span>
-              <span
-                onClick={logOut}
-                className='inline-block py-2 px-4 text-white font-semibold hover:text-gray-300 cursor-pointer'>
-                Logout
-              </span>
-            </>
-          ) : (
-            <>
+            {authRole && (
               <Link
-                href='/login'
-                className='inline-block py-2 px-4 text-white font-semibold hover:text-gray-300 mr-2'>
-                Login
+                href='/newProject'
+                className='text-gray-700 hover:text-green-600 transition-colors'>
+                New Project
               </Link>
+            )}
+            {authRole === 2 ? (
               <Link
-                href='/register'
-                className='inline-block py-2 px-4 text-white font-semibold hover:text-gray-300'>
-                Register
+                href='/dashboard'
+                className='text-gray-700 hover:text-green-600 transition-colors'>
+                Admin Dashboard
               </Link>
-            </>
-          )}
+            ) : null}
+            {authName ? (
+              <>
+                <span className='text-gray-700 mr-4'>{authName}</span>
+                <span
+                  onClick={logOut}
+                  className='text-green-600 hover:text-green-700 cursor-pointer transition-colors'>
+                  Logout
+                </span>
+              </>
+            ) : (
+              <>
+                <Link
+                  href='/login'
+                  className='text-green-600 hover:text-green-700 transition-colors'>
+                  Login
+                </Link>
+                <Link
+                  href='/register'
+                  className='text-green-600 hover:text-green-700 transition-colors'>
+                  Register
+                </Link>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </nav>

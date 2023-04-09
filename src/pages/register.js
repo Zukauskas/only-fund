@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 function Register() {
     const [error, setError] = useState(null);
@@ -48,71 +49,76 @@ function Register() {
     };
 
     return (
-        <div className='login bg-white rounded-lg shadow-md p-6'>
-            <div>
-                <div className='card-header'>
+        <div className='register bg-gray-100 flex justify-center items-center h-screen'>
+            <div className='bg-white rounded-lg shadow-lg p-8 w-full max-w-md'>
+                <div className='text-center'>
                     { error ? (
-                        <span className='text-red-500 font-medium'>{ error }</span>
+                        <span className='text-red-600 font-semibold text-lg'>{ error }</span>
                     ) : (
-                        <span className='font-medium'>Register</span>
+                        <span className='text-gray-900 font-semibold text-lg'>Register</span>
                     ) }
                 </div>
-                <div className='login-container mt-4'>
-                    <h5 className='card-title text-lg font-medium mb-4'>
+                <div className='register-container mt-4'>
+                    <h5 className='text-center text-gray-700 font-medium'>
                         <span>Hello, guest!</span>
                     </h5>
                     <div className='mb-4'>
-                        <label
-                            htmlFor='name'
-                            className='block text-gray-700 font-medium mb-2'>
+                        <label htmlFor='name' className='block mb-2 font-medium text-gray-700'>
                             Name
                         </label>
                         <input
                             id='name'
                             type='text'
                             value={ name }
-                            onChange={ e => setName(e.target.value) }
-                            className='appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                            onChange={ (e) => setName(e.target.value) }
+                            className='w-full border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
                         />
                     </div>
                     <div className='mb-4'>
                         <label
                             htmlFor='password'
-                            className='block text-gray-700 font-medium mb-2'>
+                            className='block mb-2 font-medium text-gray-700'>
                             Password
                         </label>
                         <input
                             id='password'
                             type='password'
                             value={ psw }
-                            onChange={ e => setPsw(e.target.value) }
-                            className='appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                            onChange={ (e) => setPsw(e.target.value) }
+                            className='w-full border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
                         />
                     </div>
                     <div className='mb-4'>
                         <label
                             htmlFor='password2'
-                            className='block text-gray-700 font-medium mb-2'>
+                            className='block mb-2 font-medium text-gray-700'>
                             Password Repeat
                         </label>
                         <input
                             id='password2'
                             type='password'
                             value={ psw2 }
-                            onChange={ e => setPsw2(e.target.value) }
-                            className='appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                            onChange={ (e) => setPsw2(e.target.value) }
+                            className='w-full border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
                         />
                     </div>
-                    <div id='add'>
+                    <div className='flex justify-center'>
                         <button
-                            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
+                            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
                             onClick={ register }>
                             Register
                         </button>
                     </div>
+                    <div className='mt-4 text-center'>
+                        <span className='text-gray-600'>Already have an account? </span>
+                        <Link href='/login' className='text-blue-500 hover:text-blue-700 font-medium'>
+                            Login!
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>
+
     );
 }
 

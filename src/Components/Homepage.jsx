@@ -42,7 +42,7 @@ const Homepage = () => {
 
   const imgURL = 'http://localhost:3000/img/';
   return (
-    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6'>
+    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4'>
       {stories &&
         [...stories]
           .filter(s => s.isConfirmed)
@@ -53,37 +53,42 @@ const Homepage = () => {
           .map(s => (
             <div
               key={s.id}
-              className='bg-white shadow overflow-hidden sm:rounded-lg'>
-              <Image
-                src={`${s.image ? imgURL + s.image : imgURL + 'unknown.png'}`}
-                alt=''
-                height={300}
-                width={300}
-                className='w-full h-64 object-cover'
-              />
+              className='bg-white shadow-lg overflow-hidden sm:rounded-lg'>
+              <div className='w-full h-64 relative'>
+                <Image
+                  src={`${s.image ? imgURL + s.image : imgURL + 'unknown.png'}`}
+                  alt=''
+                  height={300}
+                  width={300}
+                  className='w-full h-full object-cover'
+                />
+                <div className='absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-gray-900 via-transparent to-transparent'>
+                  <p className='text-white font-semibold text-lg'>{s.title}</p>
+                </div>
+              </div>
 
-              <div className='px-4 py-5 sm:p-6'>
-                <p className='text-gray-900 font-medium mb-2'>{s.text}</p>
+              <div className='px-6 py-5 sm:p-6'>
                 <div className='flex items-center mb-4 relative'>
                   <div className='flex-1 mr-4'>
-                    <p className='text-right text-gray-700 mb-1'>
-                      ${s.sumNeeded}
-                    </p>
-                    <div className='h-8 bg-gray-200 rounded-full '>
+                    <div className='flex justify-between items-center mb-2'>
+                      <p className='text-gray-500'>${s.sumDonated} raised</p>
+                      <p className='text-gray-500'>
+                        {Math.floor((s.sumDonated / s.sumNeeded) * 100)}% of $
+                        {s.sumNeeded}
+                      </p>
+                    </div>
+                    <div className='h-2 bg-gray-200 rounded-full '>
                       <div
                         className='h-full bg-green-500 rounded-full'
                         style={{
                           width: `${(s.sumDonated / s.sumNeeded) * 100}%`,
                         }}></div>
                     </div>
-                    <p className='text-left text-gray-500 absolute left-0 top-1/2 translate-y-1/3 leading-none'>
-                      ${s.sumDonated} Donated
-                    </p>
                   </div>
                 </div>
                 {s.sumNeeded - s.sumDonated > 0 ? (
-                  <form onSubmit={submitHandler}>
-                    <div className='mb-4'>
+                  <form onSubmit={submitHandler} className='space-y-4'>
+                    <div>
                       <label
                         htmlFor={s.id}
                         className='block text-gray-700 font-medium mb-2'>
@@ -97,10 +102,10 @@ const Homepage = () => {
                           +s.id === +enteredData.id ? enteredData.name : ''
                         }
                         onChange={nameHandler}
-                        className='border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                        className='border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
                       />
                     </div>
-                    <div className='mb-4'>
+                    <div>
                       <label
                         htmlFor={s.id}
                         className='block text-gray-700 font-medium mb-2'>
@@ -115,14 +120,14 @@ const Homepage = () => {
                           +s.id === +enteredData.id ? enteredData.amount : ''
                         }
                         onChange={amountHandler}
-                        className='border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                        className='border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
                       />
                     </div>
                     <div className='text-right'>
                       <button
                         type='submit'
                         id={s.id}
-                        className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>
+                        className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'>
                         Donate!
                       </button>
                     </div>
@@ -130,7 +135,8 @@ const Homepage = () => {
                 ) : (
                   <p className='text-gray-700'>This story is completed</p>
                 )}
-                <div>
+                <div className='mt-4'>
+                  <p className='text-gray-700 font-medium'>Donors:</p>
                   {JSON.parse(s.donorList).map((d, i) => (
                     <p key={i} className='text-gray-700'>
                       {d.name} {d.sum}
