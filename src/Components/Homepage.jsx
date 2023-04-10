@@ -22,7 +22,7 @@ const Homepage = () => {
         Fund some Stories!
       </h2>
 
-      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4 w-10/12 mx-auto'>
         {stories &&
           [...stories]
             .filter(s => s.isConfirmed)
@@ -49,6 +49,13 @@ const Homepage = () => {
                       {s.title}
                     </p>
                   </div>
+                  {s.sumDonated >= s.sumNeeded && (
+                    <div className='absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center'>
+                      <p className='text-white font-semibold text-2xl'>
+                        Funded!
+                      </p>
+                    </div>
+                  )}
                 </div>
 
                 <div className='px-6 py-5 sm:p-6'>
