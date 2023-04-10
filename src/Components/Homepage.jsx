@@ -72,7 +72,11 @@ const Homepage = () => {
                         <div
                           className='h-full bg-green-500 rounded-full'
                           style={{
-                            width: `${(s.sumDonated / s.sumNeeded) * 100}%`,
+                            width: `${
+                              (s.sumDonated / s.sumNeeded) * 100 < 100
+                                ? (s.sumDonated / s.sumNeeded) * 100
+                                : 100
+                            }%`,
                           }}></div>
                       </div>
                     </div>
