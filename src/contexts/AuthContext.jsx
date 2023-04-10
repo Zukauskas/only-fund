@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [authRole, setAuthRole] = useState(null);
   const router = useRouter();
 
-  // Check if logged on page load in next.js
+  // Check if logged on page load
   useEffect(() => {
     const fetchAuth = async () => {
       const res = await fetch('http://localhost:3000/api/login', {

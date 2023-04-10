@@ -13,7 +13,7 @@ export const GlobalProvider = ({ children }) => {
   // server
   const URL = 'http://localhost:3000/api/stories';
 
-  // -------------GET Stories (Home.jsx)----------
+  // ---------------GET Projects/Stories----------
   useEffect(() => {
     fetch(URL)
       .then(res => res.json())
@@ -22,7 +22,7 @@ export const GlobalProvider = ({ children }) => {
       });
   }, [lastUpdate]);
 
-  // -------------CREATE new story (NewProjects.jsx)---------
+  // ---------------POST New Project/Story----------
   useEffect(() => {
     if (null === project) {
       return;
@@ -40,7 +40,7 @@ export const GlobalProvider = ({ children }) => {
       });
   }, [project]);
 
-  // ---------------PUT donor list NewProject.jsx-----------
+  // ---------------UPDATE Donation Amount----------
   useEffect(() => {
     if (null === transfers) {
       return;
@@ -57,7 +57,7 @@ export const GlobalProvider = ({ children }) => {
         setLastUpdate(Date.now());
       });
   }, [transfers]);
-  // ---------------PUT confirm AdminDash.jsx-----------
+  // ------------------UPDATE Confirm Status----------
   useEffect(() => {
     if (null === confirm) {
       return;
@@ -75,7 +75,7 @@ export const GlobalProvider = ({ children }) => {
       });
   }, [confirm]);
 
-  //-----------DELETE from AdminDash.jsx-----------
+  //-----------DELETE Project/Story----------
   useEffect(() => {
     if (null === deleteStory) {
       return;

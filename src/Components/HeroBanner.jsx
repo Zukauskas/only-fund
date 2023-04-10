@@ -19,12 +19,12 @@ const HeroBanner = () => {
               <Link
                 href='/newProject'
                 className='mt-12 px-6 py-2 text-lg font-semibold bg-green-500 hover:bg-green-600 rounded-lg block'>
-                Start a Project
+                Start an OnlyFund
               </Link>
               <Link
                 href='#stories'
-                className='mt-12 px-6 py-2 text-lg font-semibold bg-blue-500 hover:bg-green-600 rounded-lg block'>
-                View stories
+                className='mt-12 px-6 py-2 text-lg font-semibold bg-blue-500 hover:bg-blue-600 rounded-lg block'>
+                Go to Stories
               </Link>
             </div>
           </div>

@@ -37,21 +37,21 @@ const NewProject = () => {
 
             <div className="w-full max-w-md mx-auto mt-10 pt-16">
                 <div className="bg-white p-8 rounded-lg shadow-md">
-                    <h2 className="text-2xl font-bold mb-6">Start a New Project</h2>
+                    <h2 className="text-xl text-center font-bold mb-6">Lets begin your funding journey</h2>
                     <form onSubmit={ submitHandler } className="space-y-4">
                         <div>
                             <label
                                 htmlFor="title"
                                 className="block text-sm font-medium text-gray-700"
                             >
-                                Enter project title:
+                                Title:
                             </label>
                             <input
                                 type="text"
                                 id="title"
                                 value={ title }
                                 onChange={ addTitleHandler }
-                                placeholder="Project title"
+                                placeholder="Enter title"
                                 title="Must contain at least 5 symbols"
                                 required
                                 className="w-full p-2 mt-1 border border-gray-300 rounded-lg"
@@ -62,14 +62,14 @@ const NewProject = () => {
                                 htmlFor="name"
                                 className="block text-sm font-medium text-gray-700"
                             >
-                                Enter project description:
+                                Description:
                             </label>
                             <textarea
                                 type="text"
                                 id="name"
                                 value={ text }
                                 onChange={ addTextHandler }
-                                placeholder="Project description"
+                                placeholder="Enter description"
                                 title="Must contain at least 100 symbols"
                                 required
                                 className="w-full h-32 p-2 mt-1 border border-gray-300 rounded-lg"
@@ -86,7 +86,7 @@ const NewProject = () => {
                                 type="number"
                                 id="donate-sum"
                                 value={ sumNeeded }
-                                placeholder="Enter sum needed"
+                                placeholder="Enter amount needed"
                                 title="Must contain at least one letter."
                                 onChange={ donationHandler }
                                 required
@@ -98,7 +98,7 @@ const NewProject = () => {
                                 htmlFor="file"
                                 className="block text-sm font-medium text-gray-700"
                             >
-                                Upload project image:
+                                Upload image:
                             </label>
                             <input
                                 type="file"
@@ -112,7 +112,7 @@ const NewProject = () => {
                             className="add w-full py-2 px-4 text-white bg-green-500 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-white"
                             type="submit"
                         >
-                            Post Project
+                            Start your OnlyFund
                         </button>
                     </form>
                 </div>

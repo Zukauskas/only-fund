@@ -12,7 +12,7 @@ function Nav() {
       <div className='container mx-auto px-4'>
         <div className='flex items-center justify-between py-4'>
           <div className='text-green-600 font-semibold text-xl tracking-tight'>
-            <h1>Only Fund</h1>
+            <h1>OnlyFund</h1>
           </div>
           <div className='hidden md:flex items-center space-x-4'>
             <Link
@@ -32,7 +32,7 @@ function Nav() {
                     ? 'text-green-600 font-bold'
                     : 'text-gray-700 hover:text-green-600 transition-colors'
                 }`}>
-                New Project
+                Start an OnlyFund
               </Link>
             )}
             {authRole === 2 ? (
