@@ -1,7 +1,8 @@
-import { GlobalProvider } from '@/contexts/Global'
+
 import Nav from '@/Components/Nav'
 import Homepage from '@/Components/Homepage'
 import Head from 'next/head'
+import HeroBanner from '@/Components/HeroBanner'
 
 
 export default function Home() {
@@ -14,6 +15,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Nav />
+      <HeroBanner />
       <Homepage />
     </>
   )

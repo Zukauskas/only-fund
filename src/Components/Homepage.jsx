@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { Global } from '../contexts/Global';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Homepage = () => {
   const [enteredData, setEnteredData] = useState({
@@ -65,6 +66,11 @@ const Homepage = () => {
                 <div className='absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-gray-900 via-transparent to-transparent'>
                   <p className='text-white font-semibold text-lg'>{s.title}</p>
                 </div>
+                <Link
+                  href={`/stories/${s.id}`}
+                  className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline absolute top-0 right-0'>
+                  Read More
+                </Link>
               </div>
 
               <div className='px-6 py-5 sm:p-6'>

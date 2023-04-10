@@ -32,29 +32,32 @@ function Nav() {
                 Admin Dashboard
               </Link>
             ) : null}
-            {authName ? (
-              <>
-                <span className='text-gray-700 mr-4'>{authName}</span>
-                <span
-                  onClick={logOut}
-                  className='text-green-600 hover:text-green-700 cursor-pointer transition-colors'>
-                  Logout
-                </span>
-              </>
-            ) : (
-              <>
-                <Link
-                  href='/login'
-                  className='text-green-600 hover:text-green-700 transition-colors'>
-                  Login
-                </Link>
-                <Link
-                  href='/register'
-                  className='text-green-600 hover:text-green-700 transition-colors'>
-                  Register
-                </Link>
-              </>
-            )}
+            <div className='border border-gray-300 rounded p-2 bg-white shadow-md'>
+              {authName ? (
+                <>
+                  <span className='text-gray-700 mr-4'>{authName}</span>
+                  <span
+                    onClick={logOut}
+                    className='text-green-600 hover:text-green-700 cursor-pointer transition-colors'>
+                    Logout
+                  </span>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href='/login'
+                    className='text-green-600 hover:text-green-700 transition-colors'>
+                    Login
+                  </Link>
+                  <span className='mx-2'>|</span>
+                  <Link
+                    href='/register'
+                    className='text-green-600 hover:text-green-700 transition-colors'>
+                    Register
+                  </Link>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>

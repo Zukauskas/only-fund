@@ -20,36 +20,41 @@ const Dashboard = () => {
     return (
         <>
             <Nav />
-            <div className='container mx-auto'>
-                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
+            <div className="container mx-auto mt-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     { stories &&
                         [...stories]
                             .sort(
                                 (a, b) =>
-                                    -(a.sumNeeded - a.sumDonated) + (b.sumNeeded - b.sumDonated),
+                                    -(a.sumNeeded - a.sumDonated) + (b.sumNeeded - b.sumDonated)
                             )
-                            .map(s => (
-                                <div key={ s.id } className='p-4 border-2 border-black rounded-lg'>
+                            .map((s) => (
+                                <div
+                                    key={ s.id }
+                                    className="p-4 bg-white border-2 border-gray-200 shadow-md rounded-lg"
+                                >
                                     <Image
-                                        className='w-48 h-48 mx-auto mb-4 object-cover'
+                                        className="w-full h-48 mb-4 object-cover rounded-t-lg"
                                         width={ 200 }
                                         height={ 200 }
-                                        src={ `${s.image ? imgURL + s.image : 'unknown.png'}` }
-                                        alt=''
+                                        src={ `${s.image ? imgURL + s.image : "unknown.png"}` }
+                                        alt=""
                                     />
-                                    <p className='mb-2'>{ s.text }</p>
-                                    <p className='font-bold mb-4'>Sum needed: { s.sumNeeded }</p>
-                                    <div className='flex justify-between'>
+                                    <p className="mb-2 text-gray-700">{ s.text }</p>
+                                    <p className="font-bold mb-4 text-gray-900">Sum needed: { s.sumNeeded }</p>
+                                    <div className="flex justify-between">
                                         { !s.isConfirmed && (
                                             <button
                                                 onClick={ () => confirmHandler(s.id) }
-                                                className='py-1 px-3 text-white bg-green-500 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-white'>
+                                                className="py-1 px-3 text-white bg-green-500 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 focus:ring-offset-white"
+                                            >
                                                 Confirm
                                             </button>
                                         ) }
                                         <button
                                             onClick={ () => deleteHandler(s.id) }
-                                            className='py-1 px-3 text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 focus:ring-offset-white'>
+                                            className="py-1 px-3 text-white bg-red-500 rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 focus:ring-offset-white"
+                                        >
                                             Delete
                                         </button>
                                     </div>
@@ -58,6 +63,7 @@ const Dashboard = () => {
                 </div>
             </div>
         </>
+
     );
 };
 

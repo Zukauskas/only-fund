@@ -26,6 +26,7 @@ export default async function handler(req, res) {
     const { confirm } = req.query;
     const { isTransfer } = req.query;
 
+
     switch (method) {
       case 'GET':
         connection.query('SELECT * FROM stories', (err, rows) => {
