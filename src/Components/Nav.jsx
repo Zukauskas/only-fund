@@ -1,9 +1,11 @@
 import { useContext } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { AuthContext } from '@/contexts/AuthContext';
 
 function Nav() {
   const { authName, logOut, authRole } = useContext(AuthContext);
+  const router = useRouter();
 
   return (
     <nav className='bg-white shadow fixed top-0 z-50 w-full'>
@@ -15,20 +17,32 @@ function Nav() {
           <div className='hidden md:flex items-center space-x-4'>
             <Link
               href='/'
-              className='text-gray-700 hover:text-green-600 transition-colors'>
+              className={`${
+                router.pathname === '/'
+                  ? 'text-green-600 font-bold'
+                  : 'text-gray-700 hover:text-green-600 transition-colors'
+              }`}>
               Home
             </Link>
             {authRole && (
               <Link
                 href='/newProject'
-                className='text-gray-700 hover:text-green-600 transition-colors'>
+                className={`${
+                  router.pathname === '/newProject'
+                    ? 'text-green-600 font-bold'
+                    : 'text-gray-700 hover:text-green-600 transition-colors'
+                }`}>
                 New Project
               </Link>
             )}
             {authRole === 2 ? (
               <Link
                 href='/dashboard'
-                className='text-gray-700 hover:text-green-600 transition-colors'>
+                className={`${
+                  router.pathname === '/dashboard'
+                    ? 'text-green-600 font-bold'
+                    : 'text-gray-700 hover:text-green-600 transition-colors'
+                }`}>
                 Admin Dashboard
               </Link>
             ) : null}
