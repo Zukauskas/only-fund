@@ -35,7 +35,7 @@ const NewProject = () => {
         <>
             <Nav />
 
-            <div className="w-full max-w-md mx-auto mt-10">
+            <div className="w-full max-w-md mx-auto mt-10 pt-16">
                 <div className="bg-white p-8 rounded-lg shadow-md">
                     <h2 className="text-2xl font-bold mb-6">Start a New Project</h2>
                     <form onSubmit={ submitHandler } className="space-y-4">

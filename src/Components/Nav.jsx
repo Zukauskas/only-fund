@@ -6,7 +6,7 @@ function Nav() {
   const { authName, logOut, authRole } = useContext(AuthContext);
 
   return (
-    <nav className='bg-white shadow'>
+    <nav className='bg-white shadow fixed top-0 z-50 w-full'>
       <div className='container mx-auto px-4'>
         <div className='flex items-center justify-between py-4'>
           <div className='text-green-600 font-semibold text-xl tracking-tight'>

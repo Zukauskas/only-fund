@@ -28,6 +28,7 @@ export default async function handler(req, res) {
         connection.query(`SELECT * FROM users WHERE username = '${name}' AND password = '${psw}'`, (err, rows) => {
           if (err) {
             res.json({ status: 'error', message: 'Error in query 1' });
+
             resolve();
           }
           if (rows.length > 0) {
@@ -39,9 +40,11 @@ export default async function handler(req, res) {
             });
             res.setHeader('Set-Cookie', cookie.serialize('session', session, { httpOnly: true, path: '/' }));
             res.json({ status: 'ok', name, role: rows[0].role });
+
             resolve();
           } else {
             res.json({ status: 'error', message: 'Incorrect username or password' });
+
             resolve();
           }
         });
@@ -53,6 +56,7 @@ export default async function handler(req, res) {
         connection.query(`SELECT * FROM users WHERE session = '${session}'`, (err, rows) => {
           if (err) {
             res.json({ status: 'error', message: 'Error in query' });
+
             resolve();
           }
           if (rows.length > 0) {
@@ -61,9 +65,11 @@ export default async function handler(req, res) {
               name: rows[0].username,
               role: rows[0].role,
             });
+
             resolve();
           } else {
             res.json({ status: 'error', message: 'Not logged in' });
+
             resolve();
           }
         });

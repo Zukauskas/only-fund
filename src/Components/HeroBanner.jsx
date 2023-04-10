@@ -4,22 +4,29 @@ import Link from 'next/link';
 const HeroBanner = () => {
   return (
     <div
-      className='bg-cover bg-center h-96 relative'
+      className='bg-cover bg-center flex justify-center items-center pt-16 min-h-screen'
       style={{ backgroundImage: "url('https://source.unsplash.com/random')" }}>
-      <div className='container mx-auto px-4 h-full'>
-        <div className='flex items-center justify-center h-full'>
-          <div className='text-center text-white bg-blue-700/75 px-8 py-8 rounded-lg'>
+      <div className='container mx-auto px-4'>
+        <div className='flex items-center justify-center'>
+          <div className='text-center text-green-900 bg-white/75 px-12 py-12 rounded-lg'>
             <h1 className='text-4xl md:text-6xl font-bold'>
               Make a difference today
             </h1>
             <p className='mt-4 text-lg md:text-2xl'>
               Start a fundraising project to support your favorite cause.
             </p>
-            <Link
-              href='/newProject'
-              className='mt-12 px-6 py-2 text-lg font-semibold bg-green-500 hover:bg-green-600 rounded-lg block'>
-              Start a Project
-            </Link>
+            <div className=' flex justify-center gap-4'>
+              <Link
+                href='/newProject'
+                className='mt-12 px-6 py-2 text-lg font-semibold bg-green-500 hover:bg-green-600 rounded-lg block'>
+                Start a Project
+              </Link>
+              <Link
+                href='#stories'
+                className='mt-12 px-6 py-2 text-lg font-semibold bg-blue-500 hover:bg-green-600 rounded-lg block'>
+                View stories
+              </Link>
+            </div>
           </div>
         </div>
       </div>

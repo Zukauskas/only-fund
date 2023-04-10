@@ -35,8 +35,10 @@ export default async function handler(req, res) {
           } else {
             res.status(200).json(rows);
           }
+
           resolve();
         });
+
         break;
       case 'POST':
         const { title, text, sumNeeded } = req.body;
@@ -73,6 +75,7 @@ export default async function handler(req, res) {
             resolve();
           }
         });
+
         break;
 
       case 'DELETE':
@@ -84,6 +87,7 @@ export default async function handler(req, res) {
           }
           resolve();
         });
+
         break;
 
       case 'PUT':
@@ -120,12 +124,14 @@ export default async function handler(req, res) {
           res.status(400).json({ message: 'Bad request' });
         }
         resolve();
+
         break;
 
       default:
         res.setHeader('Allow', ['GET', 'POST', 'DELETE', 'PUT']);
         res.status(405).end(`Method ${method} Not Allowed`);
         resolve();
+
     }
   });
 }
