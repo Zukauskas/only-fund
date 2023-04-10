@@ -6,6 +6,13 @@ import Link from 'next/link';
 const Homepage = () => {
   const { stories } = useContext(Global);
 
+  const truncateText = (text, wordLimit) => {
+    const words = text.split(' ');
+    return words.length > wordLimit
+      ? words.slice(0, wordLimit).join(' ') + '...'
+      : text;
+  };
+
   const imgURL = 'http://localhost:3000/img/';
   return (
     <>
@@ -42,11 +49,6 @@ const Homepage = () => {
                       {s.title}
                     </p>
                   </div>
-                  <Link
-                    href={`/stories/${s.id}`}
-                    className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline absolute top-0 right-0'>
-                    Read More
-                  </Link>
                 </div>
 
                 <div className='px-6 py-5 sm:p-6'>
@@ -70,12 +72,20 @@ const Homepage = () => {
                   </div>
 
                   <div className='mt-4'>
-                    <p className='text-gray-700 font-medium'>Donors:</p>
-                    {JSON.parse(s.donorList).map((d, i) => (
-                      <p key={i} className='text-gray-700'>
-                        {d.name} {d.sum}
-                      </p>
-                    ))}
+                    <p className='mb-4 text-md text-gray-600'>
+                      {truncateText(s.text, 50)}
+                    </p>
+
+                    <div className='text-right'>
+                      <Link
+                        href={`/stories/${s.id}`}
+                        className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline inline-block w-max'>
+                        Read More
+                      </Link>
+                    </div>
+                    <p className='text-gray-700 font-medium'>
+                      Donors: {JSON.parse(s.donorList).length}
+                    </p>
                   </div>
                 </div>
               </div>
