@@ -20,7 +20,7 @@ const Dashboard = () => {
     return (
         <>
             <Nav />
-            <div className="container mx-auto mt-10">
+            <div className="container mx-auto mt-10 pt-16">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     { stories &&
                         [...stories]
@@ -40,8 +40,36 @@ const Dashboard = () => {
                                         src={ `${s.image ? imgURL + s.image : "unknown.png"}` }
                                         alt=""
                                     />
-                                    <p className="mb-2 text-gray-700">{ s.text }</p>
-                                    <p className="font-bold mb-4 text-gray-900">Sum needed: { s.sumNeeded }</p>
+                                    <h2 className="mb-2 text-lg text-gray-900">{ s.title }</h2>
+                                    <p className="mb-4 text-sm text-gray-600">{ s.text }</p>
+                                    <div className='px-6 py-5 sm:p-6'>
+                                        <div className='flex items-center mb-4 relative'>
+                                            <div className='flex-1 mr-4'>
+                                                <div className='flex justify-between items-center mb-2'>
+                                                    <p className='text-gray-500'>${ s.sumDonated } raised</p>
+                                                    <p className='text-gray-500'>
+                                                        { Math.floor((s.sumDonated / s.sumNeeded) * 100) }% of $
+                                                        { s.sumNeeded }
+                                                    </p>
+                                                </div>
+                                                <div className='h-2 bg-gray-200 rounded-full '>
+                                                    <div
+                                                        className='h-full bg-green-500 rounded-full'
+                                                        style={ {
+                                                            width: `${(s.sumDonated / s.sumNeeded) * 100}%`,
+                                                        } }></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className='mt-4'>
+                                            <p className='text-gray-700 font-medium'>Donors:</p>
+                                            { JSON.parse(s.donorList).map((d, i) => (
+                                                <p key={ i } className='text-gray-700'>
+                                                    { d.name } { d.sum }
+                                                </p>
+                                            )) }
+                                        </div>
+                                    </div>
                                     <div className="flex justify-between">
                                         { !s.isConfirmed && (
                                             <button
