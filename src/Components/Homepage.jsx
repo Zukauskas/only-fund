@@ -1,45 +1,10 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { Global } from '../contexts/Global';
 import Image from 'next/image';
 import Link from 'next/link';
 
 const Homepage = () => {
-  const [enteredData, setEnteredData] = useState({
-    id: null,
-    amount: '',
-    name: '',
-  });
-
-  const [donorName, setDonorName] = useState('');
-  const [donation, setDonation] = useState('');
-
-  const { stories, setTransfers } = useContext(Global);
-
-  const submitHandler = e => {
-    e.preventDefault();
-    const buttonId = [...e.target].at(-1).id;
-    setTransfers({ id: buttonId, name: donorName, sum: donation });
-    setDonorName('');
-    setDonation('');
-    setEnteredData({
-      id: null,
-      amount: '',
-      name: '',
-    });
-  };
-
-  const amountHandler = e => {
-    setDonation(e.target.value);
-    setEnteredData(p => ({
-      ...p,
-      id: e.target.id,
-      amount: Math.abs(e.target.value),
-    }));
-  };
-  const nameHandler = e => {
-    setDonorName(e.target.value);
-    setEnteredData(p => ({ ...p, id: e.target.id, name: e.target.value }));
-  };
+  const { stories } = useContext(Global);
 
   const imgURL = 'http://localhost:3000/img/';
   return (
@@ -103,55 +68,7 @@ const Homepage = () => {
                       </div>
                     </div>
                   </div>
-                  {s.sumNeeded - s.sumDonated > 0 ? (
-                    <form onSubmit={submitHandler} className='space-y-4'>
-                      <div>
-                        <label
-                          htmlFor={s.id}
-                          className='block text-gray-700 font-medium mb-2'>
-                          Enter your name:
-                        </label>
-                        <input
-                          type='text'
-                          name=''
-                          id={s.id}
-                          value={
-                            +s.id === +enteredData.id ? enteredData.name : ''
-                          }
-                          onChange={nameHandler}
-                          className='border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
-                        />
-                      </div>
-                      <div>
-                        <label
-                          htmlFor={s.id}
-                          className='block text-gray-700 font-medium mb-2'>
-                          Choose amount to donate:
-                        </label>
-                        <input
-                          type='number'
-                          min='0'
-                          name=''
-                          id={s.id}
-                          value={
-                            +s.id === +enteredData.id ? enteredData.amount : ''
-                          }
-                          onChange={amountHandler}
-                          className='border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'
-                        />
-                      </div>
-                      <div className='text-right'>
-                        <button
-                          type='submit'
-                          id={s.id}
-                          className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent'>
-                          Donate!
-                        </button>
-                      </div>
-                    </form>
-                  ) : (
-                    <p className='text-gray-700'>This story is completed</p>
-                  )}
+
                   <div className='mt-4'>
                     <p className='text-gray-700 font-medium'>Donors:</p>
                     {JSON.parse(s.donorList).map((d, i) => (

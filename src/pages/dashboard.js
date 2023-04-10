@@ -63,11 +63,11 @@ const Dashboard = () => {
                                         </div>
                                         <div className='mt-4'>
                                             <p className='text-gray-700 font-medium'>Donors:</p>
-                                            { JSON.parse(s.donorList).map((d, i) => (
+                                            { JSON.parse(s.donorList).length > 0 ? JSON.parse(s.donorList).map((d, i) => (
                                                 <p key={ i } className='text-gray-700'>
-                                                    { d.name } { d.sum }
+                                                    { d.name } - ${ d.sum }
                                                 </p>
-                                            )) }
+                                            )) : <p className='text-gray-700'>No donors yet</p> }
                                         </div>
                                     </div>
                                     <div className="flex justify-between">
