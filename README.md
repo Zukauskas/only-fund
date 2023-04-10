@@ -2,7 +2,7 @@
 
 Trying to move my react project (which repo is hidden at the moment) to Next.js.
 
-![Work in progress](/progress.mp4)
+![Work in progress](/progress.gif)
 
 ### Things that are done
 
