@@ -43,7 +43,7 @@ function Nav() {
                     ? 'text-green-600 font-bold'
                     : 'text-gray-700 hover:text-green-600 transition-colors'
                 }`}>
-                Admin Dashboard
+                Dashboard
               </Link>
             ) : null}
             <div className='border border-gray-300 rounded p-2 bg-white shadow-md'>

@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import { useRouter } from 'next/router';
 import { Global } from '../contexts/Global';
 import { useFile } from '../hooks/useFile';
 import Nav from '@/Components/Nav';
@@ -10,6 +11,7 @@ const NewProject = () => {
     const [text, setText] = useState('');
     const [sumNeeded, setSumNeeded] = useState('');
     const [file, readFile, remImage] = useFile();
+    const router = useRouter();
 
     const addTitleHandler = e => {
         setTitle(e.target.value);
@@ -29,6 +31,7 @@ const NewProject = () => {
         setText('');
         setSumNeeded('');
         remImage();
+        router.push('/');
     };
 
     return (

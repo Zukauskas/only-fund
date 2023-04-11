@@ -115,6 +115,13 @@ function Register() {
                             Login!
                         </Link>
                     </div>
+                    <div className='mt-4 text-center'>
+                        <Link
+                            href='/'
+                            className='text-blue-500 hover:text-blue-700 font-medium'>
+                            Back to home
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>

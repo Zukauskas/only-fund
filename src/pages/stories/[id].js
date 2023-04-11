@@ -17,7 +17,7 @@ const StoryPage = ({ story }) => {
   const { stories, setTransfers } = useContext(Global);
 
   const { id } = story;
-  const storyId = stories.filter(s => s.id === id)[0];
+  const storyId = stories ? stories.filter(s => s.id === id)[0] : null;
 
   const submitHandler = e => {
     e.preventDefault();
@@ -46,7 +46,9 @@ const StoryPage = ({ story }) => {
   };
 
   const imgURL = 'http://localhost:3000/img/';
-  const progress = (storyId.sumDonated / storyId.sumNeeded) * 100;
+  const progress = stories
+    ? (storyId.sumDonated / storyId.sumNeeded) * 100
+    : null;
 
   return (
     <>
