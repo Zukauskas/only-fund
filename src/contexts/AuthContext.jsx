@@ -1,5 +1,5 @@
-import { createContext, useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { createContext, useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 export const AuthContext = createContext();
 
@@ -12,20 +12,20 @@ export const AuthProvider = ({ children }) => {
   // Check if logged on page load
   useEffect(() => {
     const fetchAuth = async () => {
-      const res = await fetch('http://localhost:3000/api/login', {
-        method: 'GET',
-        credentials: 'include',
+      const res = await fetch("https://only-fund.vercel.app/api/login", {
+        method: "GET",
+        credentials: "include",
       });
       const data = await res.json();
-      if (data.status === 'ok') {
+      if (data.status === "ok") {
         setAuthRole(data.role);
         setLogged(true);
         setAuthName(data.name);
-        router.push('/');
+        router.push("/");
       } else {
         setLogged(false);
         setAuthName(null);
-        router.push('/');
+        router.push("/");
       }
     };
     fetchAuth();
@@ -34,16 +34,16 @@ export const AuthProvider = ({ children }) => {
 
   //LOGOUT
   const logOut = () => {
-    fetch('http://localhost:3000/api/logout', {
-      method: 'POST',
-      credentials: 'include',
+    fetch("https://only-fund.vercel.app/api/logout", {
+      method: "POST",
+      credentials: "include",
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setLogged(false);
         setAuthName(false);
         setAuthRole(null);
-        router.push('/');
+        router.push("/");
       });
   };
 
@@ -57,7 +57,8 @@ export const AuthProvider = ({ children }) => {
         setAuthName,
         authRole,
         setAuthRole,
-      }}>
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

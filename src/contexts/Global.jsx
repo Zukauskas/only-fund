@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from "react";
 
 export const Global = createContext();
 
@@ -11,13 +11,13 @@ export const GlobalProvider = ({ children }) => {
   const [transfers, setTransfers] = useState(null);
 
   // server
-  const URL = 'http://localhost:3000/api/stories';
+  const URL = "https://only-fund.vercel.app/api/stories";
 
   // ---------------GET Projects/Stories----------
   useEffect(() => {
     fetch(URL)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setStories(data);
       });
   }, [lastUpdate]);
@@ -28,14 +28,14 @@ export const GlobalProvider = ({ children }) => {
       return;
     }
     fetch(URL, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(project),
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setLastUpdate(Date.now());
       });
   }, [project]);
@@ -45,15 +45,15 @@ export const GlobalProvider = ({ children }) => {
     if (null === transfers) {
       return;
     }
-    fetch(URL + '?isTransfer=true&id=' + transfers.id, {
-      method: 'PUT',
+    fetch(URL + "?isTransfer=true&id=" + transfers.id, {
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(transfers),
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setLastUpdate(Date.now());
       });
   }, [transfers]);
@@ -62,15 +62,15 @@ export const GlobalProvider = ({ children }) => {
     if (null === confirm) {
       return;
     }
-    fetch(URL + '?confirm=true&id=' + confirm.id, {
-      method: 'PUT',
+    fetch(URL + "?confirm=true&id=" + confirm.id, {
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(confirm),
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setLastUpdate(Date.now());
       });
   }, [confirm]);
@@ -80,11 +80,11 @@ export const GlobalProvider = ({ children }) => {
     if (null === deleteStory) {
       return;
     }
-    fetch(URL + '?id=' + deleteStory.id, {
-      method: 'DELETE',
+    fetch(URL + "?id=" + deleteStory.id, {
+      method: "DELETE",
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setLastUpdate(Date.now());
       });
   }, [deleteStory]);
@@ -104,7 +104,8 @@ export const GlobalProvider = ({ children }) => {
         setDeleteStory,
         transfers,
         setTransfers,
-      }}>
+      }}
+    >
       {children}
     </Global.Provider>
   );
