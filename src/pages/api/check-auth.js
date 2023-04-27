@@ -2,10 +2,13 @@ import mysql from "mysql";
 import cookie from "cookie";
 
 const connection = mysql.createConnection({
-  host: PLANETSCALE_DB_HOST,
-  user: PLANETSCALE_DB_USERNAME,
-  password: PLANETSCALE_DB_PASSWORD,
-  database: PLANETSCALE_DB,
+  host: process.env.PLANETSCALE_DB_HOST,
+  user: process.env.PLANETSCALE_DB_USERNAME,
+  password: process.env.PLANETSCALE_DB_PASSWORD,
+  database: process.env.PLANETSCALE_DB,
+  ssl: {
+    rejectUnauthorized: true,
+  },
 });
 
 connection.connect((err) => {

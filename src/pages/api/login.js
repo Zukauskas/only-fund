@@ -1,13 +1,26 @@
 import mysql from "mysql";
 import md5 from "md5";
 import cookie from "cookie";
+import initMiddleware from "@/lib/initMiddleware";
+import Cors from "cors";
 
 const connection = mysql.createConnection({
-  host: PLANETSCALE_DB_HOST,
-  user: PLANETSCALE_DB_USERNAME,
-  password: PLANETSCALE_DB_PASSWORD,
-  database: PLANETSCALE_DB,
+  host: process.env.PLANETSCALE_DB_HOST,
+  user: process.env.PLANETSCALE_DB_USERNAME,
+  password: process.env.PLANETSCALE_DB_PASSWORD,
+  database: process.env.PLANETSCALE_DB,
+  ssl: {
+    rejectUnauthorized: true,
+  },
 });
+
+const cors = initMiddleware(
+  Cors({
+    origin: process.env.NEXT_PUBLIC_API_URL, // Replace with your client-side domain
+    methods: ["POST"],
+    credentials: true, // Allow sending credentials like cookies
+  })
+);
 
 connection.connect((err) => {
   if (err) {
@@ -18,6 +31,7 @@ connection.connect((err) => {
 });
 
 export default async function handler(req, res) {
+  await cors(req, res);
   return new Promise((resolve) => {
     const { method } = req;
 

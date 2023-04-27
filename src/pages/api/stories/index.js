@@ -3,10 +3,13 @@ const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
 
 const connection = mysql.createConnection({
-  host: PLANETSCALE_DB_HOST,
-  user: PLANETSCALE_DB_USERNAME,
-  password: PLANETSCALE_DB_PASSWORD,
-  database: PLANETSCALE_DB,
+  host: process.env.PLANETSCALE_DB_HOST,
+  user: process.env.PLANETSCALE_DB_USERNAME,
+  password: process.env.PLANETSCALE_DB_PASSWORD,
+  database: process.env.PLANETSCALE_DB,
+  ssl: {
+    rejectUnauthorized: true,
+  },
 });
 
 connection.connect((err) => {
@@ -112,11 +115,9 @@ export default async function handler(req, res) {
             [id],
             (error, results) => {
               if (error) {
-                res
-                  .status(500)
-                  .json({
-                    message: "An error occurred while confirming the project",
-                  });
+                res.status(500).json({
+                  message: "An error occurred while confirming the project",
+                });
                 return;
               }
 
@@ -130,11 +131,9 @@ export default async function handler(req, res) {
             (error, results) => {
               if (error) {
                 console.error(error);
-                res
-                  .status(500)
-                  .json({
-                    message: "An error occurred while updating the donor list",
-                  });
+                res.status(500).json({
+                  message: "An error occurred while updating the donor list",
+                });
                 return;
               }
             }
@@ -144,11 +143,9 @@ export default async function handler(req, res) {
             [+sum, id],
             (error, results) => {
               if (error) {
-                res
-                  .status(500)
-                  .json({
-                    message: "An error occurred while updating the balance",
-                  });
+                res.status(500).json({
+                  message: "An error occurred while updating the balance",
+                });
                 return;
               }
 
