@@ -67,7 +67,11 @@ const StoryPage = ({ story }) => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div>
                 <Image
-                  src={story.image ? imgURL + story.image : "/unknown.png"}
+                  src={
+                    story.image
+                      ? imgURL + story.image
+                      : "https://raw.githubusercontent.com/Zukauskas/only-fund/main/public/img/unknown.png"
+                  }
                   alt={story.title}
                   width={640}
                   height={360}

@@ -40,7 +40,9 @@ const Homepage = () => {
                 <div className="w-full h-64 relative">
                   <Image
                     src={`${
-                      s.image ? imgURL + s.image : imgURL + "unknown.png"
+                      s.image
+                        ? imgURL + s.image
+                        : "https://raw.githubusercontent.com/Zukauskas/only-fund/main/public/img/unknown.png"
                     }`}
                     alt=""
                     height={300}
