@@ -8,11 +8,12 @@ export const AuthProvider = ({ children }) => {
   const [authName, setAuthName] = useState(null);
   const [authRole, setAuthRole] = useState(null);
   const router = useRouter();
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   // Check if logged on page load
   useEffect(() => {
     const fetchAuth = async () => {
-      const res = await fetch("https://only-fund.vercel.app/api/login", {
+      const res = await fetch(apiUrl + "/api/login", {
         method: "GET",
         credentials: "include",
       });
@@ -34,7 +35,7 @@ export const AuthProvider = ({ children }) => {
 
   //LOGOUT
   const logOut = () => {
-    fetch("https://only-fund.vercel.app/api/logout", {
+    fetch(apiUrl + "/api/logout", {
       method: "POST",
       credentials: "include",
     })

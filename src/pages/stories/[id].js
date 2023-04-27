@@ -45,7 +45,8 @@ const StoryPage = ({ story }) => {
     setEnteredData((p) => ({ ...p, id: e.target.id, name: e.target.value }));
   };
 
-  const imgURL = "https://only-fund.vercel.app/img/";
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const imgURL = apiUrl + "img";
   const progress = stories
     ? (storyId.sumDonated / storyId.sumNeeded) * 100
     : null;

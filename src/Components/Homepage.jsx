@@ -13,7 +13,8 @@ const Homepage = () => {
       : text;
   };
 
-  const imgURL = "https://only-fund.vercel.app/img/";
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const imgURL = apiUrl + "img";
   return (
     <>
       <h2

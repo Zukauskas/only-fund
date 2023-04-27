@@ -11,7 +11,8 @@ export const GlobalProvider = ({ children }) => {
   const [transfers, setTransfers] = useState(null);
 
   // server
-  const URL = "https://only-fund.vercel.app/api/stories";
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  const URL = apiUrl + "/api/stories";
 
   // ---------------GET Projects/Stories----------
   useEffect(() => {
