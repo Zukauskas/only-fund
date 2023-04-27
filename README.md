@@ -10,10 +10,12 @@ Trying to move my react project (which repo is hidden at the moment) to Next.js.
 - [x] Create pages for homepage, new project, admin dashboard, login, register and move content there
 - [x] Pages for individual projects
 - [x] Style everything (with Tailwindcss)
+- [x] Add a proper database (PlanetScale)
+- [x] Upload project to Vercel
+
 ### Things to do/ideas to work on
 
-- [ ] Improve registration
 - [ ] Create a proper authentication (with Next-auth or Clerk)
 - [ ] Make use of SSR for some pages (need to research)
-- [ ] Add a proper database (need to research)
-- [ ] Upload project to Vercel
+- [ ] Find out how to properly upload images
+
