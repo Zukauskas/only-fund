@@ -13,7 +13,6 @@ function Login() {
   const { setLogged, setAuthName, setAuthRole } = useContext(AuthContext);
 
   // Login function for nextjs server
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   const login = () => {
     fetch(apiUrl + "api/login", {
