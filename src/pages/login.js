@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 function Login() {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const [error, setError] = useState(null);
   const [name, setName] = useState("");
   const [psw, setPsw] = useState("");

@@ -6,7 +6,7 @@ import Nav from "@/Components/Nav";
 import withAuth from "@/Components/withAuth";
 
 const Dashboard = () => {
-  const imgURL = "https://only-fund.vercel.app/img/";
+  const imgURL = "https://storage.googleapis.com/onlyfund-bucket/";
 
   const { stories, setDeleteStory, setConfirm } = useContext(Global);
 
@@ -37,7 +37,7 @@ const Dashboard = () => {
                     className="w-full h-48 mb-4 object-cover rounded-t-lg"
                     width={200}
                     height={200}
-                    src={`${s.image ? imgURL + s.image : "unknown.png"}`}
+                    src={`${s.image ? imgURL + s.image : "/#"}`}
                     alt=""
                   />
                   <h2 className="mb-2 text-lg text-gray-900">{s.title}</h2>
