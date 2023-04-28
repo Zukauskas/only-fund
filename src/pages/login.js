@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 function Login() {
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
   const [error, setError] = useState(null);
   const [name, setName] = useState("");
   const [psw, setPsw] = useState("");
@@ -14,7 +15,7 @@ function Login() {
   // Login function for nextjs server
 
   const login = () => {
-    fetch("https://only-fund.vercel.app/api/login", {
+    fetch(apiUrl + "api/login", {
       method: "POST",
       credentials: "include",
       headers: {

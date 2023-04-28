@@ -46,7 +46,7 @@ const StoryPage = ({ story }) => {
   };
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  const imgURL = apiUrl + "img";
+  const imgURL = "https://storage.googleapis.com/onlyfund-bucket/";
   const progress = stories
     ? (storyId.sumDonated / storyId.sumNeeded) * 100
     : null;
