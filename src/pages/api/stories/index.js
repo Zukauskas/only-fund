@@ -1,6 +1,7 @@
 const mysql = require("mysql");
 const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
+const { Storage } = require("@google-cloud/storage");
 
 const connection = mysql.createConnection({
   host: process.env.PLANETSCALE_DB_HOST,
@@ -10,6 +11,17 @@ const connection = mysql.createConnection({
   ssl: {
     rejectUnauthorized: true,
   },
+});
+
+const googleApplicationCredentialsBase64 =
+  process.env.GOOGLE_APPLICATION_CREDENTIALS_BASE64;
+const googleApplicationCredentials = JSON.parse(
+  Buffer.from(googleApplicationCredentialsBase64, "base64").toString()
+);
+
+const storage = new Storage({
+  projectId: "onlyfundproject",
+  credentials: googleApplicationCredentials,
 });
 
 connection.connect((err) => {
@@ -65,11 +77,18 @@ export default async function handler(req, res) {
 
           fileName = `${uuidv4()}.${type}`;
 
-          fs.writeFileSync(`./public/img/${fileName}`, file, (err) => {
-            if (err) {
-              console.log(err);
-            }
-          });
+          // The ID of your GCS bucket
+          const bucketName = "onlyfund-bucket";
+
+          async function uploadFromMemory() {
+            await storage.bucket(bucketName).file(fileName).save(file);
+
+            console.log(
+              `${fileName} with contents ${file} uploaded to ${bucketName}.`
+            );
+          }
+
+          uploadFromMemory().catch(console.error);
         }
 
         connection.query(
