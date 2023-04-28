@@ -12,9 +12,10 @@ function Login() {
   const { setLogged, setAuthName, setAuthRole } = useContext(AuthContext);
 
   // Login function for nextjs server
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
   const login = () => {
-    fetch("https://only-fund.vercel.app/api/login", {
+    fetch(apiUrl + "api/login", {
       method: "POST",
       credentials: "include",
       headers: {
