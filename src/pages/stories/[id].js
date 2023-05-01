@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Nav from "@/Components/Nav";
 import { Global } from "@/contexts/Global";
+import { nameIsValid } from "@/utils/donationValidation";
 
 const StoryPage = ({ story }) => {
   const [enteredData, setEnteredData] = useState({
@@ -10,6 +11,8 @@ const StoryPage = ({ story }) => {
     amount: "",
     name: "",
   });
+
+  const [valid, setValid] = useState(true);
 
   const [donorName, setDonorName] = useState("");
   const [donation, setDonation] = useState("");
@@ -22,14 +25,19 @@ const StoryPage = ({ story }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     const buttonId = [...e.target].at(-1).id;
-    setTransfers({ id: buttonId, name: donorName, sum: donation });
-    setDonorName("");
-    setDonation("");
-    setEnteredData({
-      id: null,
-      amount: "",
-      name: "",
-    });
+    if (nameIsValid(donorName)) {
+      setValid(true);
+      setTransfers({ id: buttonId, name: donorName, sum: donation });
+      setDonorName("");
+      setDonation("");
+      setEnteredData({
+        id: null,
+        amount: "",
+        name: "",
+      });
+    } else {
+      setValid(false);
+    }
   };
 
   const amountHandler = (e) => {
@@ -46,7 +54,7 @@ const StoryPage = ({ story }) => {
   };
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  const imgURL = apiUrl + "img";
+  const imgURL = "https://storage.googleapis.com/onlyfund-bucket/";
   const progress = stories
     ? (storyId.sumDonated / storyId.sumNeeded) * 100
     : null;
@@ -93,8 +101,13 @@ const StoryPage = ({ story }) => {
                         value={
                           +story.id === +enteredData.id ? enteredData.name : ""
                         }
+                        required
                         onChange={nameHandler}
-                        className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                        className={`border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 ${
+                          valid
+                            ? "focus:ring-blue-500"
+                            : "focus:ring-red-500 border-red-500"
+                        }  focus:border-transparent`}
                       />
                     </div>
                     <div>
@@ -106,7 +119,7 @@ const StoryPage = ({ story }) => {
                       </label>
                       <input
                         type="number"
-                        min="0"
+                        min="1"
                         name=""
                         id={story.id}
                         value={
@@ -114,6 +127,7 @@ const StoryPage = ({ story }) => {
                             ? enteredData.amount
                             : ""
                         }
+                        required
                         onChange={amountHandler}
                         className="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       />

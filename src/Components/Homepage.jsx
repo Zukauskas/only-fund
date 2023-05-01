@@ -14,7 +14,7 @@ const Homepage = () => {
   };
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  const imgURL = apiUrl + "img";
+  const imgURL = "https://storage.googleapis.com/onlyfund-bucket/";
   return (
     <>
       <h2
