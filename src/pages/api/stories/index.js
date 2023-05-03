@@ -141,6 +141,7 @@ export default async function handler(req, res) {
               }
 
               res.json({ message: "Project confirmed" });
+              resolve();
             }
           );
         } else if (isTransfer === "true") {
@@ -169,12 +170,13 @@ export default async function handler(req, res) {
               }
 
               res.json({ message: "Money have been donated" });
+              resolve();
             }
           );
         } else {
           res.status(400).json({ message: "Bad request" });
+          resolve();
         }
-        resolve();
 
         break;
 
