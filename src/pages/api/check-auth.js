@@ -1,5 +1,5 @@
-import mysql from "mysql";
-import cookie from "cookie";
+import mysql from 'mysql'
+import cookie from 'cookie'
 
 const connection = mysql.createConnection({
   host: process.env.PLANETSCALE_DB_HOST,
@@ -7,60 +7,60 @@ const connection = mysql.createConnection({
   password: process.env.PLANETSCALE_DB_PASSWORD,
   database: process.env.PLANETSCALE_DB,
   ssl: {
-    rejectUnauthorized: true,
-  },
-});
+    rejectUnauthorized: true
+  }
+})
 
 connection.connect((err) => {
   if (err) {
-    console.log(err);
+    console.log(err)
   } else {
-    console.log("Connected to database");
+    console.log('Connected to database')
   }
-});
+})
 
-export default async function handler(req, res) {
+export default async function handler (req, res) {
   return new Promise((resolve) => {
-    const { method } = req;
+    const { method } = req
 
-    if (method === "GET") {
+    if (method === 'GET') {
       const cookies = req.headers.cookie
         ? cookie.parse(req.headers.cookie)
-        : {};
-      const session = cookies.session;
+        : {}
+      const session = cookies.session
 
       if (!session) {
-        res.status(401).json({ message: "Not authorized" });
-        resolve();
-        return;
+        res.status(401).json({ message: 'Not authorized' })
+        resolve()
+        return
       }
 
       connection.query(
         `SELECT * FROM users WHERE session = '${session}'`,
         (err, rows) => {
           if (err) {
-            res.status(500).json({ message: "Error in query" });
-            resolve();
-            return;
+            res.status(500).json({ message: 'Error in query' })
+            resolve()
+            return
           }
 
           if (rows.length > 0) {
             res.status(200).json({
-              status: "ok",
+              status: 'ok',
               name: rows[0].username,
               role: rows[0].role,
-              message: "User is logged in",
-            });
+              message: 'User is logged in'
+            })
           } else {
-            res.status(401).json({ message: "Not authorized" });
+            res.status(401).json({ message: 'Not authorized' })
           }
-          resolve();
+          resolve()
         }
-      );
+      )
     } else {
-      res.setHeader("Allow", ["GET"]);
-      res.status(405).end(`Method ${method} Not Allowed`);
-      resolve();
+      res.setHeader('Allow', ['GET'])
+      res.status(405).end(`Method ${method} Not Allowed`)
+      resolve()
     }
-  });
+  })
 }

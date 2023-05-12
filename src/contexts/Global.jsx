@@ -1,94 +1,94 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from 'react'
 
-export const Global = createContext();
+export const Global = createContext()
 
 export const GlobalProvider = ({ children }) => {
-  const [stories, setStories] = useState(null);
-  const [lastUpdate, setLastUpdate] = useState(Date.now());
-  const [project, setProject] = useState(null);
-  const [deleteStory, setDeleteStory] = useState(null);
-  const [confirm, setConfirm] = useState(null);
-  const [transfers, setTransfers] = useState(null);
+  const [stories, setStories] = useState(null)
+  const [lastUpdate, setLastUpdate] = useState(Date.now())
+  const [project, setProject] = useState(null)
+  const [deleteStory, setDeleteStory] = useState(null)
+  const [confirm, setConfirm] = useState(null)
+  const [transfers, setTransfers] = useState(null)
 
   // server
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  const URL = apiUrl + "/api/stories";
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL
+  const URL = apiUrl + '/api/stories'
 
   // ---------------GET Projects/Stories----------
   useEffect(() => {
     fetch(URL)
       .then((res) => res.json())
       .then((data) => {
-        setStories(data);
-      });
-  }, [lastUpdate]);
+        setStories(data)
+      })
+  }, [lastUpdate])
 
   // ---------------POST New Project/Story----------
   useEffect(() => {
-    if (null === project) {
-      return;
+    if (project === null) {
+      return
     }
     fetch(URL, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(project),
+      body: JSON.stringify(project)
     })
       .then((res) => res.json())
       .then((data) => {
-        setLastUpdate(Date.now());
-      });
-  }, [project]);
+        setLastUpdate(Date.now())
+      })
+  }, [project])
 
   // ---------------UPDATE Donation Amount----------
   useEffect(() => {
-    if (null === transfers) {
-      return;
+    if (transfers === null) {
+      return
     }
-    fetch(URL + "?isTransfer=true&id=" + transfers.id, {
-      method: "PUT",
+    fetch(URL + '?isTransfer=true&id=' + transfers.id, {
+      method: 'PUT',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(transfers),
+      body: JSON.stringify(transfers)
     })
       .then((res) => res.json())
       .then((data) => {
-        setLastUpdate(Date.now());
-      });
-  }, [transfers]);
+        setLastUpdate(Date.now())
+      })
+  }, [transfers])
   // ------------------UPDATE Confirm Status----------
   useEffect(() => {
-    if (null === confirm) {
-      return;
+    if (confirm === null) {
+      return
     }
-    fetch(URL + "?confirm=true&id=" + confirm.id, {
-      method: "PUT",
+    fetch(URL + '?confirm=true&id=' + confirm.id, {
+      method: 'PUT',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(confirm),
+      body: JSON.stringify(confirm)
     })
       .then((res) => res.json())
       .then((data) => {
-        setLastUpdate(Date.now());
-      });
-  }, [confirm]);
+        setLastUpdate(Date.now())
+      })
+  }, [confirm])
 
-  //-----------DELETE Project/Story----------
+  // -----------DELETE Project/Story----------
   useEffect(() => {
-    if (null === deleteStory) {
-      return;
+    if (deleteStory === null) {
+      return
     }
-    fetch(URL + "?id=" + deleteStory.id, {
-      method: "DELETE",
+    fetch(URL + '?id=' + deleteStory.id, {
+      method: 'DELETE'
     })
       .then((res) => res.json())
       .then((data) => {
-        setLastUpdate(Date.now());
-      });
-  }, [deleteStory]);
+        setLastUpdate(Date.now())
+      })
+  }, [deleteStory])
 
   return (
     <Global.Provider
@@ -104,10 +104,10 @@ export const GlobalProvider = ({ children }) => {
         deleteStory,
         setDeleteStory,
         transfers,
-        setTransfers,
+        setTransfers
       }}
     >
       {children}
     </Global.Provider>
-  );
-};
+  )
+}

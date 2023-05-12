@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
 const Footer = () => {
   return (
@@ -11,7 +11,8 @@ const Footer = () => {
               href='https://nextjs.org'
               className='text-blue-400 hover:text-blue-500'
               target='_blank'
-              rel='noopener noreferrer'>
+              rel='noopener noreferrer'
+            >
               Next.js
             </Link>
           </div>
@@ -20,14 +21,15 @@ const Footer = () => {
               href='https://github.com/Zukauskas'
               className='text-blue-400 hover:text-blue-500'
               target='_blank'
-              rel='noopener noreferrer'>
+              rel='noopener noreferrer'
+            >
               GitHub
             </Link>
           </div>
         </div>
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

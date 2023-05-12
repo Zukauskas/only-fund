@@ -1,9 +1,9 @@
 const nameIsValid = (name) => {
-  const regex = new RegExp("^[a-zA-Z ]*$");
+  const regex = '^[a-zA-Z ]*$'
   if (regex.test(name)) {
-    return true;
+    return true
   }
-  return false;
-};
+  return false
+}
 
-export { nameIsValid };
+export { nameIsValid }

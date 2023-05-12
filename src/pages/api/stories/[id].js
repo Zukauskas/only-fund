@@ -1,4 +1,4 @@
-const mysql = require("mysql");
+const mysql = require('mysql')
 
 const connection = mysql.createConnection({
   host: process.env.PLANETSCALE_DB_HOST,
@@ -6,51 +6,51 @@ const connection = mysql.createConnection({
   password: process.env.PLANETSCALE_DB_PASSWORD,
   database: process.env.PLANETSCALE_DB,
   ssl: {
-    rejectUnauthorized: true,
-  },
-});
+    rejectUnauthorized: true
+  }
+})
 
 connection.connect((err) => {
   if (err) {
-    console.log(err);
+    console.log(err)
   } else {
-    console.log("Connected to database");
+    console.log('Connected to database')
   }
-});
+})
 
-export default async function handler(req, res) {
+export default async function handler (req, res) {
   return new Promise((resolve) => {
     const {
-      query: { id },
-    } = req;
+      query: { id }
+    } = req
 
-    const { method } = req;
+    const { method } = req
 
     switch (method) {
-      case "GET":
+      case 'GET':
         connection.query(
-          "SELECT * FROM stories WHERE id = ?",
+          'SELECT * FROM stories WHERE id = ?',
           [id],
           (err, rows) => {
             if (err) {
-              console.log(err);
-              res.status(500).json({ message: "Error fetching story" });
+              console.log(err)
+              res.status(500).json({ message: 'Error fetching story' })
             } else {
               if (rows.length > 0) {
-                res.status(200).json(rows[0]);
+                res.status(200).json(rows[0])
               } else {
-                res.status(404).json({ message: "Story not found" });
+                res.status(404).json({ message: 'Story not found' })
               }
             }
-            resolve();
+            resolve()
           }
-        );
-        break;
+        )
+        break
 
       default:
-        res.setHeader("Allow", ["GET"]);
-        res.status(405).end(`Method ${method} Not Allowed`);
-        resolve();
+        res.setHeader('Allow', ['GET'])
+        res.status(405).end(`Method ${method} Not Allowed`)
+        resolve()
     }
-  });
+  })
 }

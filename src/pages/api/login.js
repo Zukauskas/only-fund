@@ -1,8 +1,8 @@
-import mysql from "mysql";
-import md5 from "md5";
-import cookie from "cookie";
-import initMiddleware from "@/lib/initMiddleware";
-import Cors from "cors";
+import mysql from 'mysql'
+import md5 from 'md5'
+import cookie from 'cookie'
+import initMiddleware from '@/lib/initMiddleware'
+import Cors from 'cors'
 
 const connection = mysql.createConnection({
   host: process.env.PLANETSCALE_DB_HOST,
@@ -10,109 +10,109 @@ const connection = mysql.createConnection({
   password: process.env.PLANETSCALE_DB_PASSWORD,
   database: process.env.PLANETSCALE_DB,
   ssl: {
-    rejectUnauthorized: true,
-  },
-});
+    rejectUnauthorized: true
+  }
+})
 
 const cors = initMiddleware(
   Cors({
     origin: process.env.NEXT_PUBLIC_API_URL, // Replace with your client-side domain
-    methods: ["POST"],
-    credentials: true, // Allow sending credentials like cookies
+    methods: ['POST'],
+    credentials: true // Allow sending credentials like cookies
   })
-);
+)
 
 connection.connect((err) => {
   if (err) {
-    console.log(err);
+    console.log(err)
   } else {
-    console.log("Connected to database");
+    console.log('Connected to database')
   }
-});
+})
 
-export default async function handler(req, res) {
-  await cors(req, res);
+export default async function handler (req, res) {
+  await cors(req, res)
   return new Promise((resolve) => {
-    const { method } = req;
+    const { method } = req
 
     switch (method) {
-      case "POST": {
-        const name = req.body.name;
-        const psw = md5(req.body.psw);
+      case 'POST': {
+        const name = req.body.name
+        const psw = md5(req.body.psw)
         connection.query(
           `SELECT * FROM users WHERE username = '${name}' AND password = '${psw}'`,
           (err, rows) => {
             if (err) {
-              res.json({ status: "error", message: "Error in query 1" });
+              res.json({ status: 'error', message: 'Error in query 1' })
 
-              resolve();
+              resolve()
             }
             if (rows.length > 0) {
-              const session = md5(Math.random());
+              const session = md5(Math.random())
               connection.query(
                 `UPDATE users SET session = '${session}' WHERE username = '${name}' AND password = '${psw}'`,
                 (err, rows) => {
                   if (err) {
-                    res.json({ status: "error", message: "Error in query 2" });
+                    res.json({ status: 'error', message: 'Error in query 2' })
                   }
                 }
-              );
+              )
               res.setHeader(
-                "Set-Cookie",
-                cookie.serialize("session", session, {
+                'Set-Cookie',
+                cookie.serialize('session', session, {
                   httpOnly: true,
-                  path: "/",
+                  path: '/'
                 })
-              );
-              res.json({ status: "ok", name, role: rows[0].role });
+              )
+              res.json({ status: 'ok', name, role: rows[0].role })
 
-              resolve();
+              resolve()
             } else {
               res.json({
-                status: "error",
-                message: "Incorrect username or password",
-              });
+                status: 'error',
+                message: 'Incorrect username or password'
+              })
 
-              resolve();
+              resolve()
             }
           }
-        );
-        break;
+        )
+        break
       }
 
-      case "GET": {
-        const session = req.cookies.session;
+      case 'GET': {
+        const session = req.cookies.session
         connection.query(
           `SELECT * FROM users WHERE session = '${session}'`,
           (err, rows) => {
             if (err) {
-              res.json({ status: "error", message: "Error in query" });
+              res.json({ status: 'error', message: 'Error in query' })
 
-              resolve();
+              resolve()
             }
             if (rows.length > 0) {
               res.json({
-                status: "ok",
+                status: 'ok',
                 name: rows[0].username,
-                role: rows[0].role,
-              });
+                role: rows[0].role
+              })
 
-              resolve();
+              resolve()
             } else {
-              res.json({ status: "error", message: "Not logged in" });
+              res.json({ status: 'error', message: 'Not logged in' })
 
-              resolve();
+              resolve()
             }
           }
-        );
-        break;
+        )
+        break
       }
 
       default: {
-        res.setHeader("Allow", ["GET", "POST"]);
-        res.status(405).end(`Method ${method} Not Allowed`);
-        resolve();
+        res.setHeader('Allow', ['GET', 'POST'])
+        res.status(405).end(`Method ${method} Not Allowed`)
+        resolve()
       }
     }
-  });
+  })
 }
